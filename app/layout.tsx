@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const pretendard = localFont({
   src: [
@@ -25,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="dark"> 
-      <body className={`${pretendard.variable} antialiased`}>{children}</body>
+      <body className={`${pretendard.variable} antialiased font-sans`}>
+        <Header />
+        {children}</body>
     </html>
   );
 }
