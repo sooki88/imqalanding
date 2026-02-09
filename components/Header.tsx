@@ -23,7 +23,7 @@ export default function Header() {
         transitionDuration={1000}
         playOnce={false}
         style={{
-          background: "rgba(255, 255, 255, 0.1)",
+          background: "rgba(255, 255, 255, 0.05)",
           backdropFilter: "blur(8px)",
           WebkitBackdropFilter: "blur(8px)",
           borderWidth: "0.7px",

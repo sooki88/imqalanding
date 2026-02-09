@@ -1,7 +1,7 @@
 "use client";
 
-// import BlurText from "./BlurText";
 import SplitText from "./SplitText";
+import GlareHover from "./GlareHover";
 import ShapeBlur from "./ShapeBlur";
 import Magnet from "./Magnet";
 
@@ -34,7 +34,51 @@ export default function Hero() {
         데 필요한 핵심 데이터를 확보할 수 있습니다.
       </p>
       <div className="flex gap-4 mt-8">
-        <Magnet padding={50} disabled={false} magnetStrength={10}>
+        <GlareHover
+          glareColor="#ffffff"
+          glareOpacity={0.3}
+          glareAngle={-80}
+          glareSize={600}
+          width="172px"
+          height="44px"
+          borderRadius="4px"
+          borderColor="#fff"
+          transitionDuration={1000}
+          playOnce={false}
+          style={{
+            background: "rgba(255, 255, 255, 0.05)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            borderWidth: "0.7px",
+          }}
+        >
+          <h2 className="text-white text-base font-medium leading-[1.5]">
+            IMQA 기능 살펴보기
+          </h2>
+        </GlareHover>
+        <GlareHover
+          glareColor="#000"
+          glareOpacity={0.3}
+          glareAngle={-80}
+          glareSize={600}
+          width="172px"
+          height="44px"
+          borderRadius="4px"
+          borderColor="#fff"
+          transitionDuration={1000}
+          playOnce={false}
+          style={{
+            background: "rgba(255, 255, 255, 1)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            borderWidth: "0.7px",
+          }}
+        >
+          <h2 className="text-black text-base font-medium leading-[1.5]">
+            IMQA 도입 문의하기
+          </h2>
+        </GlareHover>
+        {/* <Magnet padding={50} disabled={false} magnetStrength={10}>
           <p className="rounded-sm border-[0.5px] border-white px-5 py-[10px] text-white text-base font-medium leading-[1.5] backdrop-blur-[15px] hover:bg-white/15 duration-300">
             IMQA 기능 살펴보기
           </p>
@@ -43,7 +87,7 @@ export default function Hero() {
           <p className="rounded-sm bg-white px-5 py-[10px] text-black text-base font-medium leading-[1.5] backdrop-blur-[15px] hover:bg-white/85 duration-300">
             IMQA 도입 문의하기
           </p>
-        </Magnet>
+        </Magnet> */}
       </div>
     </div>
   );
