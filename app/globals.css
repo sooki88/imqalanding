@@ -47,8 +47,13 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
-html, body {
-  font-family: var(--font-pretendard), system-ui, -apple-system, sans-serif;
+html,
+body {
+  font-family:
+    var(--font-pretendard),
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 :root {
@@ -128,6 +133,3 @@ html, body {
     @apply bg-background text-foreground;
   }
 }
-
-
-

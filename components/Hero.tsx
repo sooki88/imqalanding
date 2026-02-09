@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
 // import BlurText from "./BlurText";
 import SplitText from "./SplitText";
-import ShapeBlur from './ShapeBlur';
+import ShapeBlur from "./ShapeBlur";
 import Magnet from "./Magnet";
 
 export default function Hero() {
-    const handleAnimationComplete = () => {
-        console.log('Animation completed!');
-    };
+  const handleAnimationComplete = () => {
+    console.log("Animation completed!");
+  };
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6">
@@ -28,16 +28,23 @@ export default function Hero() {
         rootMargin="-100px"
         textAlign="center"
         onLetterAnimationComplete={handleAnimationComplete}
-    />
-    <p className="text-white font-normal leading-[1.5] text-xl mt-8">사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고 <br/> 문제를 해결하는 데 필요한 핵심 데이터를 확보할 수 있습니다.</p>
-        <div className="flex gap-4 mt-8">
-            <Magnet padding={50} disabled={false} magnetStrength={10}>
-                <p className="rounded-sm border-[0.5px] border-white px-5 py-[10px] text-white text-base font-medium leading-[1.5] backdrop-blur-[15px] hover:bg-white/15 duration-300">IMQA 기능 살펴보기</p>
-            </Magnet>
-            <Magnet padding={50} disabled={false} magnetStrength={10}>
-                <p className="rounded-sm bg-white px-5 py-[10px] text-black text-base font-medium leading-[1.5] backdrop-blur-[15px] hover:bg-white/85 duration-300">IMQA 도입 문의하기</p>
-            </Magnet>
-        </div>
+      />
+      <p className="text-white font-normal leading-[1.5] text-xl mt-8">
+        사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고 <br /> 문제를 해결하는
+        데 필요한 핵심 데이터를 확보할 수 있습니다.
+      </p>
+      <div className="flex gap-4 mt-8">
+        <Magnet padding={50} disabled={false} magnetStrength={10}>
+          <p className="rounded-sm border-[0.5px] border-white px-5 py-[10px] text-white text-base font-medium leading-[1.5] backdrop-blur-[15px] hover:bg-white/15 duration-300">
+            IMQA 기능 살펴보기
+          </p>
+        </Magnet>
+        <Magnet padding={50} disabled={false} magnetStrength={10}>
+          <p className="rounded-sm bg-white px-5 py-[10px] text-black text-base font-medium leading-[1.5] backdrop-blur-[15px] hover:bg-white/85 duration-300">
+            IMQA 도입 문의하기
+          </p>
+        </Magnet>
+      </div>
     </div>
   );
 }
