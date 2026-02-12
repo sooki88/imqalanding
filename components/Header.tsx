@@ -23,9 +23,9 @@ export default function Header() {
         transitionDuration={1000}
         playOnce={false}
         style={{
-          background: "rgba(255, 255, 255, 0.05)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
+          background: "rgba(0, 0, 0, 0.05)",
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
           borderWidth: "0.7px",
         }}
       >
