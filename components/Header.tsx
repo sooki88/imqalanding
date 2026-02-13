@@ -1,9 +1,9 @@
 import Image from "next/image";
-import GlareHover from "./GlareHover";
+import GlareHover from "./reactbits/GlareHover";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center px-10 h-16 fixed top-0 right-0 left-0 z-1">
+    <header className="flex justify-between items-center px-10 h-16 fixed top-0 right-0 left-0 z-2 backdrop-blur-sm">
       <Image
         src="/imqa_logo_wht.svg"
         alt="IMQA logo"

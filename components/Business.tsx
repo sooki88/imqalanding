@@ -3,7 +3,10 @@
 "use client";
 
 import Image from "next/image";
-import LogoLoop from "./LogoLoop";
+import LogoLoop from "./reactbits/LogoLoop";
+import PixelCard from "./reactbits/PixelCard";
+import SpotlightCard from "./reactbits/SpotlightCard";
+import { ThreeColors } from "@/constants/ThreeColors";
 
 export default function Business() {
   return (
@@ -28,21 +31,21 @@ export default function Business() {
       </p>
 
       {/* 로고들 */}
-      <div
+      {/* <div
         style={{
           height: "90px",
           position: "relative",
           overflow: "hidden",
-          marginTop: "80px",
+          marginTop: "56px",
         }}
-      >
-        {/* Basic horizontal loop */}
+      > */}
+      <div className="h-[90px] relative overflow-hidden mt-14">
         <LogoLoop
           logos={imageLogos}
-          speed={100}
+          speed={90}
           direction="left"
           logoHeight={90}
-          gap={60}
+          gap={100}
           hoverSpeed={0}
           scaleOnHover
           fadeOut
@@ -52,28 +55,38 @@ export default function Business() {
       </div>
 
       {/* 카드 */}
-      <div className="flex gap-6">
-        {BusinessCardContent.map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-start border border-white rounded-lg p-6"
-          >
-            <h3 className="text-white text-[28px] text-medium leading-[1.4] max-w-[253px]">
-              <span className="">{item.emphasis}</span> {item.title}
-            </h3>
-            {item.content.map((i, idx) => (
-              <div key={idx} className="">
-                <Image
-                  src="/icon_check.svg"
-                  alt="체크 아이콘"
-                  width={16}
-                  height={16}
-                  priority
-                />
+      <div className="flex gap-6 mt-14 w-full max-w-[1200px]">
+        {BusinessCardContent.map((item, index) => {
+          const currentColor = ThreeColors[index];
+
+          return (
+            <SpotlightCard
+              key={index}
+              className="custom-spotlight-card"
+              spotlightColor={currentColor}
+            >
+              <h3 className="text-white text-[28px] font-semibold leading-[1.4] max-w-[270px] text-left break-keep">
+                <span style={{ color: currentColor }}>{item.emphasis}</span>
+                {item.title}
+              </h3>
+
+              <div className="flex flex-col gap-2 mt-6">
+                {item.content.map((i, idx) => (
+                  <div
+                    key={idx}
+                    className="flex gap-2 items-start text-lg text-white/80 text-left break-keep"
+                  >
+                    <CheckIcon
+                      color={currentColor}
+                      className="mt-[6px] shrink-0"
+                    />
+                    {i}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ))}
+            </SpotlightCard>
+          );
+        })}
       </div>
     </section>
   );
@@ -155,3 +168,29 @@ const BusinessCardContent = [
     ],
   },
 ];
+
+// 체크 아이콘
+const CheckIcon = ({
+  color,
+  className,
+}: {
+  color: string;
+  className: string;
+}) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M3.2002 7.20078L6.8002 10.8008L12.8002 4.80078"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);

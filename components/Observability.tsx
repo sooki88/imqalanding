@@ -3,20 +3,11 @@
 "use client";
 
 import Image from "next/image";
+import Tag from "./Tag";
 
 export default function Observability() {
   return (
     <section className="relative w-full flex flex-col items-center justify-center text-center px-6 py-25 overflow-hidden">
-      {/* <div className="absolute inset-0 z-0 mix-blend-screen">
-        <DarkVeil
-          hueShift={6}
-          noiseIntensity={0}
-          scanlineIntensity={0.17}
-          speed={2}
-          scanlineFrequency={0.5}
-          warpAmount={0}
-        />
-      </div> */}
       {/* 타이틀 */}
       <h2 className="text-white text-[40px] font-semibold leading-[1.3]">
         <span className="bg-[linear-gradient(270deg,_#00D0FF_41.3%,_#00FFB7_59.14%)] bg-clip-text text-transparent">
@@ -29,7 +20,7 @@ export default function Observability() {
         데 필요한 핵심 데이터를 확보할 수 있습니다.
       </p>
       {/* front-end */}
-      <Step number="01" title="Front-end" className="mt-20">
+      <Step number="01" title="Front-end" className="mt-14">
         <Image
           src="/icon_ios.svg"
           alt="ios 아이콘"
@@ -101,11 +92,8 @@ export default function Observability() {
           ))}
         </div>
       </Step>
-
       <Line />
-
       {/* 04 IMQA Observability Solution */}
-
       <Step number="04" title="IMQA Observability Solution">
         <div className="flex flex-wrap gap-x-6 gap-y-4 max-w-[620px] justify-center my-2">
           {ObservabilitySolution.map((item) => (

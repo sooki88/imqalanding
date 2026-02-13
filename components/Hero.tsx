@@ -1,9 +1,9 @@
 "use client";
 
-import SplitText from "./SplitText";
-import GlareHover from "./GlareHover";
-import Aurora from "./Aurora";
-import Threads from "./Threads";
+import SplitText from "./reactbits/SplitText";
+import GlareHover from "./reactbits/GlareHover";
+import Aurora from "./reactbits/Aurora";
+import Threads from "./reactbits/Threads";
 import { useState } from "react";
 
 export default function Hero() {

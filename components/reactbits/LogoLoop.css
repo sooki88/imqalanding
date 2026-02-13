@@ -11,10 +11,10 @@
   display: inline-block;
 }
 
-.logoloop--scale-hover {
+/* .logoloop--scale-hover {
   padding-top: calc(var(--logoloop-logoHeight) * 0.1);
   padding-bottom: calc(var(--logoloop-logoHeight) * 0.1);
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   .logoloop {
@@ -116,7 +116,7 @@
 
 .logoloop--fade::before,
 .logoloop--fade::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;

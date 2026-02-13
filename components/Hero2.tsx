@@ -1,8 +1,8 @@
 "use client";
 
-import SplitText from "./SplitText";
-import GlareHover from "./GlareHover";
-import Hyperspeed from "./Hyperspeed"; // Threads 임포트 확인
+import SplitText from "./reactbits/SplitText";
+import GlareHover from "./reactbits/GlareHover";
+import Hyperspeed from "./reactbits/Hyperspeed"; // Threads 임포트 확인
 
 export default function Hero2() {
   const handleAnimationComplete = () => {

@@ -25,8 +25,8 @@
 //   );
 // }
 
-import Aurora from "@/components/Aurora";
 import Business from "@/components/Business";
+import Features from "@/components/Features";
 import Hero from "@/components/Hero";
 import Observability from "@/components/Observability";
 
@@ -36,6 +36,7 @@ export default function Home() {
       <Hero />
       <Observability />
       <Business />
+      <Features />
     </main>
   );
 }

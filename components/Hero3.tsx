@@ -1,8 +1,8 @@
 "use client";
 
-import SplitText from "./SplitText";
-import GlareHover from "./GlareHover";
-import Prism from "./Prism";
+import SplitText from "./reactbits/SplitText";
+import GlareHover from "./reactbits/GlareHover";
+import Prism from "./reactbits/Prism";
 import Image from "next/image";
 
 export default function Hero3() {
