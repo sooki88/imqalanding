@@ -3,6 +3,8 @@
 import SplitText from "./reactbits/SplitText";
 import GlareHover from "./reactbits/GlareHover";
 import Hyperspeed from "./reactbits/Hyperspeed"; // Threads 임포트 확인
+import Orb from "./Orb";
+import NeonWaveParticles from "./NeonWaveParticles";
 
 export default function Hero2() {
   const handleAnimationComplete = () => {
@@ -11,48 +13,7 @@ export default function Hero2() {
 
   return (
     // relative를 주어 Threads가 이 안에서만 꽉 차게 만듭니다.
-    <section className="relative min-h-screen w-full flex flex-col items-center text-center py-50 px-6 overflow-hidden">
-      {/* 배경 레이어 */}
-      <div className="absolute inset-0 z-0">
-        <Hyperspeed
-          effectOptions={{
-            distortion: "turbulentDistortion",
-            length: 400,
-            roadWidth: 10,
-            islandWidth: 2,
-            lanesPerRoad: 3,
-            fov: 90,
-            fovSpeedUp: 150,
-            speedUp: 2,
-            carLightsFade: 0.4,
-            totalSideLightSticks: 20,
-            lightPairsPerRoadWay: 40,
-            shoulderLinesWidthPercentage: 0.05,
-            brokenLinesWidthPercentage: 0.1,
-            brokenLinesLengthPercentage: 0.5,
-            lightStickWidth: [0.12, 0.5],
-            lightStickHeight: [1.3, 1.7],
-            movingAwaySpeed: [60, 80],
-            movingCloserSpeed: [-120, -160],
-            carLightsLength: [12, 80],
-            carLightsRadius: [0.05, 0.14],
-            carWidthPercentage: [0.3, 0.5],
-            carShiftX: [-0.8, 0.8],
-            carFloorSeparation: [0, 5],
-            colors: {
-              roadColor: 526344,
-              islandColor: 657930,
-              background: 0,
-              shoulderLines: 1250072,
-              brokenLines: 1250072,
-              leftCars: [14177983, 6770850, 12732332],
-              rightCars: [242627, 941733, 3294549],
-              sticks: 242627,
-            },
-          }}
-        />
-      </div>
-
+    <section className="relative min-h-screen w-full flex flex-col items-center text-center justify-center px-6 pb-20 overflow-hidden">
       {/* 콘텐츠 레이어: z-10과 pointer-events-none 조합 */}
       {/* pointer-events-none을 부모에 주고, 실제 버튼에만 auto를 주면 마우스가 배경까지 전달됩니다. */}
       <div className="relative z-10 pointer-events-none flex flex-col items-center justify-center">
@@ -125,6 +86,10 @@ export default function Hero2() {
             </h2>
           </GlareHover>
         </div>
+      </div>
+      {/* 배경 레이어 */}
+      <div className="absolute -bottom-300 overflow-hidden h-[200%]">
+        <NeonWaveParticles />;
       </div>
     </section>
   );

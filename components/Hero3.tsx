@@ -2,8 +2,8 @@
 
 import SplitText from "./reactbits/SplitText";
 import GlareHover from "./reactbits/GlareHover";
-import Prism from "./reactbits/Prism";
 import Image from "next/image";
+import DomeGallery from "./DomeGallery";
 
 export default function Hero3() {
   const handleAnimationComplete = () => {
@@ -11,20 +11,16 @@ export default function Hero3() {
   };
 
   return (
-    // relative를 주어 Threads가 이 안에서만 꽉 차게 만듭니다.
-    <section className="relative min-h-screen w-full flex flex-col items-center text-center py-50 px-6 overflow-hidden">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center py-50 px-6 overflow-hidden">
       {/* 배경 레이어 */}
       <div className="absolute inset-0 z-0">
-        <Prism
-          animationType="rotate"
-          timeScale={0.5}
-          height={3.5}
-          baseWidth={5.5}
-          scale={3.6}
-          hueShift={0}
-          colorFrequency={1}
-          noise={0}
-          glow={1}
+        <DomeGallery
+          fit={1}
+          minRadius={600}
+          maxVerticalRotationDeg={0}
+          segments={34}
+          dragDampening={2}
+          grayscale={false}
         />
       </div>
 
@@ -101,7 +97,7 @@ export default function Hero3() {
           </GlareHover>
         </div>
       </div>
-      <div style={{ backgroundColor: "bg-[#D3D3D3]", marginTop: 56 }}>
+      {/* <div style={{ backgroundColor: "bg-[#D3D3D3]", marginTop: 56 }}>
         <Image
           src="/hero_dashboard.webp"
           alt="IMQA logo"
@@ -110,7 +106,7 @@ export default function Hero3() {
           priority
           className="mix-blend-screen"
         />
-      </div>
+      </div> */}
     </section>
   );
 }

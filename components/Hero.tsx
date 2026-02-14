@@ -29,16 +29,22 @@ export default function Hero() {
         />
       </div> */}
       <div className="absolute inset-0 z-0 mix-blend-screen">
-        <Threads
-          amplitude={3}
+        {/* <Threads
+          amplitude={2.5}
           distance={0.1}
           enableMouseInteraction={true}
           color={[0.23921568627450981, 0.49411764705882355, 1]}
+        /> */}
+        <Threads
+          amplitude={2.5}
+          distance={0.1}
+          enableMouseInteraction={true}
+          ccolor={[1, 1, 1]}
         />
       </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center justify-center">
-        <h2 className="bg-[linear-gradient(270deg,_#00D0FF_41.3%,_#00FFB7_59.14%)] bg-clip-text text-transparent text-[56px] font-semibold leading-[1.3]">
+        <h2 className="text-main-gradient text-[56px] font-semibold leading-[1.3]">
           모바일 앱부터 웹까지
         </h2>
         <SplitText

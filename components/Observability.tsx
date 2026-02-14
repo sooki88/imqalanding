@@ -8,14 +8,14 @@ import Tag from "./Tag";
 export default function Observability() {
   return (
     <section className="relative w-full flex flex-col items-center justify-center text-center px-6 py-25 overflow-hidden">
+      {/* <Tag>TELEMETRY</Tag> */}
+
       {/* 타이틀 */}
       <h2 className="text-white text-[40px] font-semibold leading-[1.3]">
-        <span className="bg-[linear-gradient(270deg,_#00D0FF_41.3%,_#00FFB7_59.14%)] bg-clip-text text-transparent">
-          Observability
-        </span>
-        를 프론트엔드에서 시작하다
+        {/* <span className="text-main-gradient">Observability</span>를 */}
+        Observability를 프론트엔드에서 시작하다
       </h2>
-      <p className="mt-6 text-white font-normal leading-[1.5] text-lg text-center opacity-80">
+      <p className="mt-6 text-white/70 font-normal leading-[1.6] text-lg text-center">
         사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고 <br /> 문제를 해결하는
         데 필요한 핵심 데이터를 확보할 수 있습니다.
       </p>

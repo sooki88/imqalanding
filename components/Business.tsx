@@ -2,11 +2,10 @@
 
 "use client";
 
-import Image from "next/image";
 import LogoLoop from "./reactbits/LogoLoop";
-import PixelCard from "./reactbits/PixelCard";
 import SpotlightCard from "./reactbits/SpotlightCard";
-import { ThreeColors } from "@/constants/ThreeColors";
+import { ColorArray } from "@/constants/ThreeColors";
+import Tag from "./Tag";
 
 export default function Business() {
   return (
@@ -21,11 +20,15 @@ export default function Business() {
           warpAmount={0}
         />
       </div> */}
+
+      {/* <Tag>BUSINESS</Tag> */}
+
       {/* 타이틀 */}
       <h2 className="text-white text-[40px] font-semibold leading-[1.3]">
         최적의 사용자 경험은 비즈니스를 움직인다
+        {/* <span className="text-main-gradient">비즈니스</span>를 움직인다 */}
       </h2>
-      <p className="mt-6 text-white font-normal leading-[1.5] text-lg text-center opacity-80">
+      <p className="mt-6 text-white/70 font-normal leading-[1.6] text-lg text-center">
         대한민국 대표 금융·보험·이커머스 기업들은 IMQA를 통해 <br /> 사용자 경험
         품질을 개선하고 고객 만족도를 향상시키고 있습니다.
       </p>
@@ -42,10 +45,10 @@ export default function Business() {
       <div className="h-[90px] relative overflow-hidden mt-14">
         <LogoLoop
           logos={imageLogos}
-          speed={90}
+          speed={80}
           direction="left"
           logoHeight={90}
-          gap={100}
+          gap={120}
           hoverSpeed={0}
           scaleOnHover
           fadeOut
@@ -57,7 +60,7 @@ export default function Business() {
       {/* 카드 */}
       <div className="flex gap-6 mt-14 w-full max-w-[1200px]">
         {BusinessCardContent.map((item, index) => {
-          const currentColor = ThreeColors[index];
+          const currentColor = ColorArray[index % ColorArray.length];
 
           return (
             <SpotlightCard
@@ -74,7 +77,7 @@ export default function Business() {
                 {item.content.map((i, idx) => (
                   <div
                     key={idx}
-                    className="flex gap-2 items-start text-lg text-white/80 text-left break-keep"
+                    className="flex gap-2 items-start text-lg text-white/70 text-left break-keep"
                   >
                     <CheckIcon
                       color={currentColor}

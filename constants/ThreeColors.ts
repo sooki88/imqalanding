@@ -1,5 +1,4 @@
-export const ThreeColors = [
-  "rgba(73, 185, 255, 1)",
-  "rgba(0, 234, 255, 1)",
-  "rgba(0, 255, 212, 1)",
+export const ColorArray = [
+  "rgba(0, 191, 255, 1)",
+  "rgba(0, 119, 255, 1)",
 ] as const;

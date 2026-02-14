@@ -28,11 +28,14 @@
 import Business from "@/components/Business";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
+import Hero2 from "@/components/Hero2";
+import Hero3 from "@/components/Hero3";
 import Observability from "@/components/Observability";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center min-h-screen w-full overflow-hidden">
+      {/* <Hero /> */}
       <Hero />
       <Observability />
       <Business />

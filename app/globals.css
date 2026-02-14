@@ -131,5 +131,18 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+
+    .text-main-gradient {
+      @apply bg-clip-text text-transparent;
+      background-image: linear-gradient(300deg, #0077ff 41.3%, #00bfff 59.14%);
+    }
+
+    .text-main-skyblue {
+      @apply text-[#00bfff];
+    }
+
+    .text-main-blue {
+      @apply text-[#0077ff];
+    }
   }
 }
