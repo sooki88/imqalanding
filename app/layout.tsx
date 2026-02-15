@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Aurora from "@/components/reactbits/Aurora";
+import Footer from "@/components/Footer";
 
 const pretendard = localFont({
   src: [
@@ -55,6 +56,8 @@ export default function RootLayout({
         </div>
 
         {children}
+
+        <Footer />
       </body>
     </html>
   );

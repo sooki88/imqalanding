@@ -7,7 +7,7 @@ import Tag from "./Tag";
 
 export default function Observability() {
   return (
-    <section className="relative w-full flex flex-col items-center justify-center text-center px-6 py-25 overflow-hidden">
+    <section>
       {/* <Tag>TELEMETRY</Tag> */}
 
       {/* 타이틀 */}
@@ -15,7 +15,7 @@ export default function Observability() {
         {/* <span className="text-main-gradient">Observability</span>를 */}
         Observability를 프론트엔드에서 시작하다
       </h2>
-      <p className="mt-6 text-white/70 font-normal leading-[1.6] text-lg text-center">
+      <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-lg text-center">
         사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고 <br /> 문제를 해결하는
         데 필요한 핵심 데이터를 확보할 수 있습니다.
       </p>
@@ -139,11 +139,8 @@ interface StepProps {
 
 function Step({ number, title, children, className = "" }: StepProps) {
   return (
-    // <div
-    //   className={`flex flex-col items-center gap-1 pt-3 pb-4 px-10 rounded-[60px] text-xs text-[#ADC8FF] leading-[1.5] backdrop-blur-[4px] shadow-[inset_6px_2px_2px_0_rgba(0,17,255,0.50),_inset_-4px_-2px_8px_0_#ffffff] ${className}`}
-    // >
     <div
-      className={`flex flex-col items-center gap-1 pt-3 pb-4 px-10 rounded-[60px] text-xs text-[#ADC8FF] leading-[1.5] backdrop-blur-[4px] shadow-[inset_6px_2px_2px_0_rgba(75,79,251,0.50),_inset_-4px_-2px_8px_0_#ffffff] ${className}`}
+      className={`flex flex-col items-center gap-1 pt-3 pb-4 px-10 rounded-[60px] text-xs text-slate-400 leading-[1.5] backdrop-blur-[4px] shadow-[inset_6px_2px_2px_0_rgba(75,79,251,0.50),_inset_-4px_-2px_8px_0_#ffffff] ${className}`}
     >
       {number} {title}
       <div className="flex gap-4 items-center justify-center">{children}</div>

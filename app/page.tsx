@@ -30,7 +30,9 @@ import Features from "@/components/Features";
 import Hero from "@/components/Hero";
 import Hero2 from "@/components/Hero2";
 import Hero3 from "@/components/Hero3";
+import News from "@/components/News";
 import Observability from "@/components/Observability";
+import Solution from "@/components/Solution";
 
 export default function Home() {
   return (
@@ -40,6 +42,8 @@ export default function Home() {
       <Observability />
       <Business />
       <Features />
+      <News />
+      <Solution />
     </main>
   );
 }

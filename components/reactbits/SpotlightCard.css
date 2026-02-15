@@ -2,8 +2,9 @@
   position: relative;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #ffffff63;
-  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid #1c293d;
+  /* background-color: rgba(14, 23, 43, 0.5); */
+  background-color: rgba(30, 41, 59, 0.5);
   padding: 24px;
   padding-bottom: 72px;
   overflow: hidden;

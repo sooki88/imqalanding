@@ -131,18 +131,31 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+    scroll-behavior: smooth;
+  }
 
-    .text-main-gradient {
-      @apply bg-clip-text text-transparent;
-      background-image: linear-gradient(300deg, #0077ff 41.3%, #00bfff 59.14%);
-    }
+  section {
+    @apply relative w-full flex flex-col items-center justify-center text-center px-6 py-25 overflow-hidden;
+  }
+}
 
-    .text-main-skyblue {
-      @apply text-[#00bfff];
-    }
+@layer components {
+  /* 그라데이션 텍스트 */
+  .text-main-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(300deg, #0077ff 41.3%, #00bfff 59.14%);
+    /* 사파리 호환성을 위해 추가 */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    .text-main-blue {
-      @apply text-[#0077ff];
-    }
+  /* 메인 컬러 유틸리티 */
+  .text-main-skyblue {
+    @apply text-[#00bfff];
+  }
+
+  .text-main-blue {
+    @apply text-[#0077ff];
   }
 }

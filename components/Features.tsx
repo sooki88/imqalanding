@@ -1,13 +1,14 @@
-// 세번째 섹션
+// 네번째 섹션
 
 "use client";
 
 import { ColorArray } from "@/constants/ThreeColors";
 import Tag from "./Tag";
+import Image from "next/image";
 
 export default function Features() {
   return (
-    <section className="relative w-full flex flex-col items-center justify-center gap-20 text-center px-6 py-25 overflow-hidden">
+    <section>
       {/* <Tag>FEATURES</Tag> */}
 
       {/* 타이틀 */}
@@ -27,6 +28,7 @@ export default function Features() {
             color={currentColor}
             direction={direction}
             content={item}
+            index={index}
           />
         );
       })}
@@ -39,40 +41,39 @@ interface contentType {
   title: string[];
   description: string[];
   tags: string[];
+  image: string;
 }
 
 function Card({
   color,
   direction,
   content,
+  index,
 }: {
   color: string;
   direction: string;
   content: contentType;
+  index: number;
 }) {
   const isImageLeft = direction === "left";
 
   return (
     <div
-      className={`flex gap-25 w-full max-w-[1200px] items-start ${
+      className={`flex gap-20 w-full max-w-[1200px] items-start ${index == 0 ? "mt-20" : "mt-25"} ${
         isImageLeft ? "flex-row" : "flex-row-reverse"
       }`}
     >
-      {/* ✅ 이미지 영역: 1:1 + 좌우 동일 너비 */}
+      {/* 이미지 영역: 1:1 + 좌우 동일 너비 */}
       <div className="w-1/2">
-        <div className="w-full aspect-square bg-[#101010] rounded-lg overflow-hidden relative flex items-center justify-center">
+        <div className="w-full aspect-square bg-rgba(255, 255, 255, 0.05) rounded-lg overflow-hidden relative flex items-center justify-center">
           이미지
-          {/* 실제 이미지면 이렇게 (1:1에 꽉 채우기, 왜곡X)
-        {content.imageSrc && (
           <Image
-            src={content.imageSrc}
-            alt={content.title}
+            src={content.image}
+            alt={content.title[1]}
             fill
             className="object-cover"
             sizes="(max-width: 1200px) 50vw, 600px"
           />
-        )}
-        */}
         </div>
       </div>
 
@@ -89,7 +90,7 @@ function Card({
             <h3
               key={title}
               className={`text-3xl w-3/4 text-left font-semibold leading-[1.4] break-keep ${
-                index === 0 ? "text-white/70" : "text-white"
+                index === 0 ? "text-slate-300" : "text-white"
               }`}
             >
               {title}
@@ -101,7 +102,7 @@ function Card({
           {content.description.map((des) => (
             <p
               key={des}
-              className="text-white/70 text-lg text-left leading-[1.6] break-keep"
+              className="text-slate-300 text-lg text-left leading-[1.6] break-keep"
             >
               {des}
             </p>
@@ -140,6 +141,7 @@ const FeatureContents = [
       "사용자 맞춤형 패널 구성",
       "현황 및 이슈 포인트 파악",
     ],
+    image: "/feature1.webp",
   },
   {
     category: "Real User Analysis",
@@ -154,6 +156,7 @@ const FeatureContents = [
       "세션↔︎트레이스 분석",
       "성능 ∙ 이벤트 ∙ 에러 파악",
     ],
+    image: "/feature2.webp",
   },
   {
     category: "Distributed Tracing",
@@ -172,6 +175,7 @@ const FeatureContents = [
       "XHR・Fetch",
       "웹 페이지 로드",
     ],
+    image: "/feature3.webp",
   },
   {
     category: "Exception, Error, Log ㅡ User",
@@ -189,5 +193,6 @@ const FeatureContents = [
       "에러 메시지",
       "기타 메타데이터",
     ],
+    image: "/feature4.webp",
   },
 ];
