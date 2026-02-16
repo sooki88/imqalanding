@@ -2,7 +2,7 @@
 
 "use client";
 
-import { ColorArray } from "@/constants/ThreeColors";
+import { ColorArray } from "@/constants/ColorArray";
 import Tag from "./Tag";
 import Image from "next/image";
 
@@ -65,7 +65,7 @@ function Card({
     >
       {/* 이미지 영역: 1:1 + 좌우 동일 너비 */}
       <div className="w-1/2">
-        <div className="w-full aspect-square bg-rgba(255, 255, 255, 0.05) rounded-lg overflow-hidden relative flex items-center justify-center">
+        <div className="w-full aspect-square bg-rgba(255, 255, 255, 0.05) rounded-sm overflow-hidden relative flex items-center justify-center">
           이미지
           <Image
             src={content.image}

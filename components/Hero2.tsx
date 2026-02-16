@@ -3,8 +3,8 @@
 import SplitText from "./reactbits/SplitText";
 import GlareHover from "./reactbits/GlareHover";
 import Hyperspeed from "./reactbits/Hyperspeed"; // Threads 임포트 확인
-import Orb from "./Orb";
-import NeonWaveParticles from "./NeonWaveParticles";
+import Orb from "./reactbits/Orb";
+import NeonWaveParticles from "./reactbits/NeonWaveParticles";
 
 export default function Hero2() {
   const handleAnimationComplete = () => {

@@ -1,7 +1,7 @@
 .card-spotlight {
   position: relative;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid #1c293d;
   /* background-color: rgba(14, 23, 43, 0.5); */
   background-color: rgba(30, 41, 59, 0.5);

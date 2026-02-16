@@ -39,7 +39,7 @@ export default function Hero() {
           amplitude={2.5}
           distance={0.1}
           enableMouseInteraction={true}
-          ccolor={[1, 1, 1]}
+          color={[1, 1, 1]}
         />
       </div>
 

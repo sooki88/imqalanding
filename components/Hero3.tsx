@@ -3,7 +3,7 @@
 import SplitText from "./reactbits/SplitText";
 import GlareHover from "./reactbits/GlareHover";
 import Image from "next/image";
-import DomeGallery from "./DomeGallery";
+import DomeGallery from "./reactbits/DomeGallery";
 
 export default function Hero3() {
   const handleAnimationComplete = () => {

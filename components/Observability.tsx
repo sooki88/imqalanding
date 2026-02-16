@@ -111,7 +111,7 @@ export default function Observability() {
                 priority
               /> */}
               </span>
-              <span className="text-white opacity-70 text-xs leading-[1.5] font-light text-left">
+              <span className="text-slate-400 text-xs leading-[1.5] font-light text-left mt-1">
                 {item.summary}
               </span>
             </div>
@@ -125,7 +125,7 @@ export default function Observability() {
 // 라인
 function Line() {
   return (
-    <div className="w-[2px] h-[20px] bg-white rounded-full my-2 opacity-80"></div>
+    <div className="w-[1.5px] h-[20px] bg-slate-500 rounded-full my-2"></div>
   );
 }
 
@@ -140,7 +140,8 @@ interface StepProps {
 function Step({ number, title, children, className = "" }: StepProps) {
   return (
     <div
-      className={`flex flex-col items-center gap-1 pt-3 pb-4 px-10 rounded-[60px] text-xs text-slate-400 leading-[1.5] backdrop-blur-[4px] shadow-[inset_6px_2px_2px_0_rgba(75,79,251,0.50),_inset_-4px_-2px_8px_0_#ffffff] ${className}`}
+      className={`flex flex-col items-center gap-2 max-w-[680px] pt-2 pb-3 px-10 rounded-sm text-xs font-medium text-slate-400 leading-[1.5] backdrop-blur-[4px] bg-[rgba(30,41,59,0.5)] border border-slate-800 ${className}`}
+      // className={`flex flex-col items-center gap-1 pt-3 pb-4 px-10 rounded-[60px] text-xs text-slate-400 leading-[1.5] backdrop-blur-[4px] shadow-[inset_6px_2px_2px_0_rgba(75,79,251,0.50),_inset_-4px_-2px_8px_0_#ffffff] ${className}`}
     >
       {number} {title}
       <div className="flex gap-4 items-center justify-center">{children}</div>

@@ -4,7 +4,7 @@
 
 import LogoLoop from "./reactbits/LogoLoop";
 import SpotlightCard from "./reactbits/SpotlightCard";
-import { ColorArray } from "@/constants/ThreeColors";
+import { ColorArray } from "@/constants/ColorArray";
 import Tag from "./Tag";
 
 export default function Business() {
@@ -65,7 +65,7 @@ export default function Business() {
           return (
             <SpotlightCard
               key={index}
-              className="custom-spotlight-card"
+              className="custom-spotlight-card group"
               spotlightColor={currentColor}
             >
               <h3 className="text-white text-[28px] font-semibold leading-[1.4] max-w-[270px] text-left break-keep">
@@ -77,7 +77,7 @@ export default function Business() {
                 {item.content.map((i, idx) => (
                   <div
                     key={idx}
-                    className="flex gap-2 items-start text-lg text-slate-400 text-left break-keep"
+                    className="flex gap-2 items-start text-lg text-slate-400 text-left break-keep transition-colors duration-200 delay-0 group-hover:text-white"
                   >
                     <CheckIcon
                       color={currentColor}

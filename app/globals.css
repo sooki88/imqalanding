@@ -159,3 +159,28 @@ body {
     @apply text-[#0077ff];
   }
 }
+
+/* Solution 섹션 배경 줌인 */
+.solution-bg {
+  background-image: url("/solution_bg.webp"); /* 파일명 확인 */
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  animation: solutionZoom 60s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes solutionZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-bg {
+    animation: none;
+  }
+}

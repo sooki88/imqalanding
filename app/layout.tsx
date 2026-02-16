@@ -47,12 +47,12 @@ export default function RootLayout({
       <body className={`${pretendard.variable} antialiased font-sans relative`}>
         <Header />
         <div className="fixed inset-0 z-0">
-          <Aurora
+          {/* <Aurora
             colorStops={["#00aeff", "#0011ff", "#6929ff"]}
             blend={0.5}
             amplitude={1.0}
             speed={1}
-          />
+          /> */}
         </div>
 
         {children}

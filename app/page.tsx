@@ -32,6 +32,7 @@ import Hero2 from "@/components/Hero2";
 import Hero3 from "@/components/Hero3";
 import News from "@/components/News";
 import Observability from "@/components/Observability";
+import Observability2 from "@/components/Observability2";
 import Solution from "@/components/Solution";
 
 export default function Home() {
@@ -39,7 +40,8 @@ export default function Home() {
     <main className="flex flex-col items-center min-h-screen w-full overflow-hidden">
       {/* <Hero /> */}
       <Hero />
-      <Observability />
+      {/* <Observability /> */}
+      <Observability2 />
       <Business />
       <Features />
       <News />
