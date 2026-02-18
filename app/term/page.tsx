@@ -1,3 +1,7 @@
+import TERM_DATA from "@/constants/Term_data";
+import PolicyContent from "@/lib/PolicyContent";
+import type { Metadata } from "next";
+
 export default function TermPage() {
   return (
     <main className="min-h-dvh flex flex-col items-center gap-8 w-full px-6 mt-16 mb-30">
@@ -5,7 +9,24 @@ export default function TermPage() {
         이용약관
       </div>
 
-      <div className="flex-1 gap-20 w-full max-w-[1200px]">내용</div>
+      <PolicyContent content={TERM_DATA} />
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: "이용약관",
+  description: "IMQA 이용약관 페이지입니다.",
+  alternates: {
+    canonical: "https://imqa.io/term",
+  },
+  openGraph: {
+    url: "https://imqa.io/term",
+    title: "이용약관 | IMQA",
+    description: "IMQA 이용약관 페이지입니다.",
+  },
+  twitter: {
+    title: "이용약관 | IMQA",
+    description: "IMQA 이용약관 페이지입니다. ",
+  },
+};

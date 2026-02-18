@@ -1,5 +1,6 @@
 import CompanyMap from "@/components/CompanyMap";
 import ContactForm from "@/components/ContactForm";
+import type { Metadata } from "next";
 
 export default function ContactPage() {
   return (
@@ -21,3 +22,23 @@ export default function ContactPage() {
     </main>
   );
 }
+
+export const metadata: Metadata = {
+  title: "문의하기",
+  description:
+    "IMQA 도입 및 상담 문의를 남겨주세요. 담당 부서에서 빠르게 안내드립니다.",
+  alternates: {
+    canonical: "https://imqa.io/contact",
+  },
+  openGraph: {
+    url: "https://imqa.io/contact",
+    title: "문의하기 | IMQA",
+    description:
+      "IMQA 도입 및 상담 문의를 남겨주세요. 담당 부서에서 빠르게 안내드립니다.",
+  },
+  twitter: {
+    title: "문의하기 | IMQA",
+    description:
+      "IMQA 도입 및 상담 문의를 남겨주세요. 담당 부서에서 빠르게 안내드립니다.",
+  },
+};
