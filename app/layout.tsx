@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
-import Aurora from "@/components/reactbits/Aurora";
 import Footer from "@/components/Footer";
+import Aurora from "@/components/reactbits/Aurora";
+import FloatingBtn from "@/components/FloatingBtn";
 
 const pretendard = localFont({
   src: [
@@ -46,18 +47,20 @@ export default function RootLayout({
     <html lang="ko" className="dark">
       <body className={`${pretendard.variable} antialiased font-sans relative`}>
         <Header />
-        <div className="fixed inset-0 z-0">
-          {/* <Aurora
+        <div className="fixed inset-0 -z-1">
+          <Aurora
             colorStops={["#00aeff", "#0011ff", "#6929ff"]}
             blend={0.5}
             amplitude={1.0}
             speed={1}
-          /> */}
+          />
         </div>
 
         {children}
 
         <Footer />
+
+        <FloatingBtn />
       </body>
     </html>
   );

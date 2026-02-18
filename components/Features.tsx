@@ -3,8 +3,7 @@
 "use client";
 
 import { ColorArray } from "@/constants/ColorArray";
-import Tag from "./Tag";
-import Image from "next/image";
+import CyclingImage from "./CyclingImage";
 
 export default function Features() {
   return (
@@ -41,7 +40,7 @@ interface contentType {
   title: string[];
   description: string[];
   tags: string[];
-  image: string;
+  images: string[];
 }
 
 function Card({
@@ -59,6 +58,7 @@ function Card({
 
   return (
     <div
+      id="features"
       className={`flex gap-20 w-full max-w-[1200px] items-start ${index == 0 ? "mt-20" : "mt-25"} ${
         isImageLeft ? "flex-row" : "flex-row-reverse"
       }`}
@@ -66,14 +66,13 @@ function Card({
       {/* 이미지 영역: 1:1 + 좌우 동일 너비 */}
       <div className="w-1/2">
         <div className="w-full aspect-square bg-rgba(255, 255, 255, 0.05) rounded-sm overflow-hidden relative flex items-center justify-center">
-          이미지
-          <Image
-            src={content.image}
-            alt={content.title[1]}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1200px) 50vw, 600px"
-          />
+          {/* <CyclingImage
+            images={content.images}
+            alt={content.title?.[1] ?? content.title?.[0] ?? "image"}
+            intervalMs={2000}
+            fadeMs={500}
+          /> */}
+          <CyclingImage images={content.images} title={content.title[1]} />
         </div>
       </div>
 
@@ -141,7 +140,7 @@ const FeatureContents = [
       "사용자 맞춤형 패널 구성",
       "현황 및 이슈 포인트 파악",
     ],
-    image: "/feature1.webp",
+    images: ["/dashboard1.webp", "/dashboard2.webp"],
   },
   {
     category: "Real User Analysis",
@@ -156,7 +155,7 @@ const FeatureContents = [
       "세션↔︎트레이스 분석",
       "성능 ∙ 이벤트 ∙ 에러 파악",
     ],
-    image: "/feature2.webp",
+    images: ["/session_1.webp", "/session_2.webp"],
   },
   {
     category: "Distributed Tracing",
@@ -175,7 +174,7 @@ const FeatureContents = [
       "XHR・Fetch",
       "웹 페이지 로드",
     ],
-    image: "/feature3.webp",
+    images: ["/trace_1.webp", "/trace_2.webp"],
   },
   {
     category: "Exception, Error, Log ㅡ User",
@@ -193,6 +192,6 @@ const FeatureContents = [
       "에러 메시지",
       "기타 메타데이터",
     ],
-    image: "/feature4.webp",
+    images: ["/log1.webp", "/log2.webp"],
   },
 ];

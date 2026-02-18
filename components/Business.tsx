@@ -2,27 +2,14 @@
 
 "use client";
 
+import LogoLoopLite from "./reactbits/LogoLoop";
 import LogoLoop from "./reactbits/LogoLoop";
 import SpotlightCard from "./reactbits/SpotlightCard";
 import { ColorArray } from "@/constants/ColorArray";
-import Tag from "./Tag";
 
 export default function Business() {
   return (
     <section>
-      {/* <div className="absolute inset-0 z-0 mix-blend-screen">
-        <DarkVeil
-          hueShift={6}
-          noiseIntensity={0}
-          scanlineIntensity={0.17}
-          speed={2}
-          scanlineFrequency={0.5}
-          warpAmount={0}
-        />
-      </div> */}
-
-      {/* <Tag>BUSINESS</Tag> */}
-
       {/* 타이틀 */}
       <h2 className="text-white text-[40px] font-semibold leading-[1.3]">
         최적의 사용자 경험은 비즈니스를 움직인다
@@ -34,14 +21,6 @@ export default function Business() {
       </p>
 
       {/* 로고들 */}
-      {/* <div
-        style={{
-          height: "90px",
-          position: "relative",
-          overflow: "hidden",
-          marginTop: "56px",
-        }}
-      > */}
       <div className="h-[90px] relative overflow-hidden mt-14">
         <LogoLoop
           logos={imageLogos}
@@ -49,7 +28,6 @@ export default function Business() {
           direction="left"
           logoHeight={90}
           gap={120}
-          hoverSpeed={0}
           scaleOnHover
           fadeOut
           fadeOutColor="#ffffff"

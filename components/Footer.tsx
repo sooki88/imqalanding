@@ -29,7 +29,7 @@ export default function Footer() {
             개인정보처리방침
           </Link>
           <Link
-            href="/terms"
+            href="/term"
             className="text-slate-300 text-sm hover:text-white transition-colors"
           >
             이용약관

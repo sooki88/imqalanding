@@ -218,7 +218,6 @@
 "use client";
 
 import Image from "next/image";
-import Tag from "./Tag";
 import { useEffect, useState } from "react";
 
 const steps = ["step1", "step2", "step3", "step4"];

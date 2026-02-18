@@ -1,38 +1,36 @@
+"use client";
+
 import Image from "next/image";
-import GlareHover from "./reactbits/GlareHover";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+
+  const isContactPage = pathname === "/contact";
+
   return (
-    <header className="flex justify-between items-center px-10 h-16 fixed top-0 right-0 left-0 z-2 backdrop-blur-sm">
-      <Image
-        src="/imqa_logo_wht.svg"
-        alt="IMQA logo"
-        width={94}
-        height={23}
-        priority
-      />
-      <GlareHover
-        glareColor="#ffffff"
-        glareOpacity={0.3}
-        glareAngle={-80}
-        glareSize={600}
-        width="80px"
-        height="38px"
-        borderRadius="4px"
-        borderColor="#fff"
-        transitionDuration={1000}
-        playOnce={false}
-        style={{
-          background: "rgba(0, 0, 0, 0.05)",
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
-          borderWidth: "0.7px",
-        }}
-      >
-        <h2 className="text-white text-sm font-medium leading-[1.5]">
+    <header className="flex justify-between items-center px-6 h-16 fixed top-0 right-0 left-0 z-50 pointer-events-auto backdrop-blur-sm">
+      {/* // <header className="flex justify-between items-center px-10 h-16 fixed top-0 right-0 left-0 z-50 pointer-events-auto [transform:translateZ(0)] [backface-visibility:hidden] will-change-transform backdrop-blur-sm"> */}
+      <Link href="/">
+        <Image
+          src="/imqa_logo_wht.svg"
+          alt="IMQA logo"
+          width={94}
+          height={23}
+          priority
+        />
+      </Link>
+
+      {!isContactPage && (
+        <Link
+          href="/contact"
+          className="py-2 px-4 border-[0.7px] border-white bg-[rgba(0, 0, 0, 0.05)] rounded-sm text-sm text-white font-medium leading-[1.5] hover:bg-white/10 duration-300 ease-in-out"
+          // className="py-2 px-4 border-[0.7px] border-white bg-[rgba(0, 0, 0, 0.05)] rounded-sm text-sm text-white font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/10 duration-300 ease-in-out"
+        >
           문의하기
-        </h2>
-      </GlareHover>
+        </Link>
+      )}
     </header>
   );
 }

@@ -1,20 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
+import WaveText from "./WaveText";
 import SplitText from "./reactbits/SplitText";
-import GlareHover from "./reactbits/GlareHover";
-import Aurora from "./reactbits/Aurora";
 import Threads from "./reactbits/Threads";
-import { useState } from "react";
 
 export default function Hero() {
-  // const [animationKey, setAnimationKey] = useState(0);
-
   const handleAnimationComplete = () => {
-    console.log("끝");
-    // 애니메이션이 끝나고 2초 뒤에 다시 시작하고 싶다면
-    // setTimeout(() => {
-    //   setAnimationKey((prev) => prev + 1);
-    // }, 2000);
+    console.log("All letters have animated!");
   };
 
   return (
@@ -47,8 +41,14 @@ export default function Hero() {
         <h2 className="text-main-gradient text-[56px] font-semibold leading-[1.3]">
           모바일 앱부터 웹까지
         </h2>
+        {/* <WaveText
+          text="사용자 경험을 실시간으로 읽다"
+          charDelayMs={120}
+          riseMs={1200}
+          holdMs={2000}
+          offsetPx={18}
+        /> */}
         <SplitText
-          // key={animationKey}
           text="사용자 경험을 실시간으로 읽다"
           className="text-[56px] font-semibold text-white leading-[1.3]"
           delay={50}
@@ -58,60 +58,30 @@ export default function Hero() {
           from={{ opacity: 0, y: 40 }}
           to={{ opacity: 1, y: 0 }}
           threshold={0.1}
+          rootMargin="-100px"
           textAlign="center"
           onLetterAnimationComplete={handleAnimationComplete}
+          showCallback
         />
+
         <p className="text-white font-normal leading-[1.5] text-xl mt-8 opacity-80">
           사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고 <br /> 문제를
           해결하는 데 필요한 핵심 데이터를 확보할 수 있습니다.
         </p>
 
         <div className="flex gap-4 mt-12 pointer-events-auto">
-          <GlareHover
-            glareColor="#ffffff"
-            glareOpacity={0.3}
-            glareAngle={-80}
-            glareSize={600}
-            width="172px"
-            height="44px"
-            borderRadius="4px"
-            borderColor="#fff"
-            transitionDuration={1000}
-            playOnce={false}
-            style={{
-              background: "rgba(0, 0, 0, 0.05)",
-              backdropFilter: "blur(4px)",
-              WebkitBackdropFilter: "blur(4px)",
-              borderWidth: "0.7px",
-            }}
+          <Link
+            href="#features"
+            className="py-[10px] px-5 border-[0.7px] border-white bg-[rgba(0, 0, 0, 0.05)] rounded-sm text-white text-base font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/10 duration-300 ease-in-out"
           >
-            <h2 className="text-white text-base font-medium leading-[1.5]">
-              IMQA 기능 살펴보기
-            </h2>
-          </GlareHover>
-
-          <GlareHover
-            glareColor="#000"
-            glareOpacity={0.3}
-            glareAngle={-80}
-            glareSize={600}
-            width="172px"
-            height="44px"
-            borderRadius="4px"
-            borderColor="#fff"
-            transitionDuration={1000}
-            playOnce={false}
-            style={{
-              background: "rgba(255, 255, 255, 1)",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              borderWidth: "0.7px",
-            }}
+            IMQA 기능 살펴보기
+          </Link>
+          <Link
+            href="/contact"
+            className="py-[10px] px-5 border-[0.7px] border-white bg-white rounded-sm text-black font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/90 duration-300 ease-in-out"
           >
-            <h2 className="text-black text-base font-medium leading-[1.5]">
-              IMQA 도입 문의하기
-            </h2>
-          </GlareHover>
+            IMQA 도입 문의하기
+          </Link>
         </div>
       </div>
     </section>
