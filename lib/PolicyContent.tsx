@@ -11,7 +11,7 @@ export default function PolicyContent({ content }: PolicyContentProps) {
         // 1. "제N조", "부칙" 등 큰 제목 스타일링
         // ^ (줄 시작)과 m 플래그를 사용하여 각 줄의 시작을 정확히 타겟팅합니다.
         .replace(
-          /^(제\s*\d+\s*조|부\s*칙)(.*)$/gm,
+          /^(제\s*\d+\s*장|제\s*\d+\s*조|부\s*칙)(.*)$/gm,
           '<h2 class="text-xl font-semibold text-white pt-4 pb-1">$1$2</h2>',
         )
 

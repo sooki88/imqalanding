@@ -14,21 +14,8 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center px-6 overflow-hidden">
       {/* 배경 레이어 */}
-      {/* <div className="absolute inset-0 z-0">
-        <Aurora
-          colorStops={["#66fffc", "#0011ff", "#6929ff"]}
-          blend={0.5}
-          amplitude={1.0}
-          speed={1}
-        />
-      </div> */}
+
       <div className="absolute inset-0 z-0 mix-blend-screen">
-        {/* <Threads
-          amplitude={2.5}
-          distance={0.1}
-          enableMouseInteraction={true}
-          color={[0.23921568627450981, 0.49411764705882355, 1]}
-        /> */}
         <Threads
           amplitude={2.5}
           distance={0.1}
@@ -38,7 +25,8 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center justify-center">
-        <h2 className="text-main-gradient text-[56px] font-semibold leading-[1.3]">
+        {/* <h2 className="text-main-gradient text-[56px] font-semibold leading-[1.3]"> */}
+        <h2 className="text-main-gradient text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3]">
           모바일 앱부터 웹까지
         </h2>
         {/* <WaveText
@@ -50,7 +38,8 @@ export default function Hero() {
         /> */}
         <SplitText
           text="사용자 경험을 실시간으로 읽다"
-          className="text-[56px] font-semibold text-white leading-[1.3]"
+          // className="text-[56px] font-semibold text-white leading-[1.3]"
+          className="text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold text-white leading-[1.3]"
           delay={50}
           duration={1.25}
           ease="power3.out"
@@ -61,7 +50,7 @@ export default function Hero() {
           rootMargin="-100px"
           textAlign="center"
           onLetterAnimationComplete={handleAnimationComplete}
-          showCallback
+          // showCallback
         />
 
         <p className="text-white font-normal leading-[1.5] text-xl mt-8 opacity-80">

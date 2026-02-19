@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function CompanyMap() {
   // 구글 맵 검색 URL (주소를 기반으로 생성)
   const mapAddress = encodeURIComponent("서울특별시 용산구 두텁바위로 21");
-  const mapSrc = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${mapAddress}`;
+  // const mapSrc = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${mapAddress}`;
 
   // 만약 API 키 없이 가장 간단하게 넣고 싶다면 아래 형식을 사용하세요 (공개용)
   const simpleMapSrc =
