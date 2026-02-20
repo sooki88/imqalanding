@@ -4,10 +4,10 @@ import Image from "next/image";
 
 export default function CompanyMap() {
   // 구글 맵 검색 URL (주소를 기반으로 생성)
-  const mapAddress = encodeURIComponent("서울특별시 용산구 두텁바위로 21");
+  // const mapAddress = encodeURIComponent("서울특별시 용산구 두텁바위로 21");
   // const mapSrc = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${mapAddress}`;
 
-  // 만약 API 키 없이 가장 간단하게 넣고 싶다면 아래 형식을 사용하세요 (공개용)
+  // API 키 없이 작동
   const simpleMapSrc =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.5074218844!2d126.9722381126629!3d37.54538887192621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eda266df41%3A0x9a05243698804d59!2z7Ja064uI7LuYIOyjvOyLne2ajOyCrA!5e0!3m2!1sko!2skr!4v1710000000000!5m2!1sko!2skr";
 

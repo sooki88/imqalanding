@@ -241,3 +241,17 @@ body::-webkit-scrollbar {
     opacity: 1;
   }
 }
+
+/* 로고 무한 루프 */
+.logo-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes logo-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-1 * var(--logo-distance)), 0, 0);
+  }
+}

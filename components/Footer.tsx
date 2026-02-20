@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="relative w-full overflow-hidden px-6 py-10 bg-slate-800">
       <div className="max-w-[1200px] m-auto">
         <span className="text-base text-white">
-          © 2026 ONYCOM Inc. All rights reserved
+          © ONYCOM Inc. All rights reserved
         </span>
 
         {/* 회사정보 */}

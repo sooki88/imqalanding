@@ -12,8 +12,7 @@ export default function Solution() {
       <div className="flex flex-col items-center justify-center w-full py-25">
         <h3 className="text-3xl w-3/4 font-semibold leading-[1.4] break-keep text-white text-center">
           서비스를 관찰하고 실제 사용자 경험을 분석해보세요 <br />
-          수많은 질문에 <strong className="text-main-blue">IMQA</strong>로
-          답하세요
+          수많은 질문에 <strong className="">IMQA</strong>로 답하세요
         </h3>
         <div className="flex gap-4 mt-12 pointer-events-auto">
           <Link
