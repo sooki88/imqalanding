@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const imageLogos = [
-  { src: "/logo_samsung.webp", alt: "삼성 로고" },
+  { src: "/logo_samsung2.webp", alt: "삼성 로고" },
   { src: "/logo_financial.webp", alt: "금융결제원 로고" },
   { src: "/logo_bnk.webp", alt: "부산은행 로고" },
-  { src: "/logo_lina.webp", alt: "라이나 로고" },
+  { src: "/logo_lina2.webp", alt: "라이나 로고" },
   { src: "/logo_seomin.webp", alt: "서민금융 로고" },
   { src: "/logo_cj.webp", alt: "cj 대한통운 로고" },
   { src: "/logo_dongwon.webp", alt: "동원 로고" },
@@ -16,8 +16,6 @@ const imageLogos = [
   { src: "/logo_cardoc.webp", alt: "카닥 로고" },
   { src: "/logo_aswon.webp", alt: "에스원 로고" },
 ];
-
-// ... (위쪽 코드는 동일)
 
 export default function LogoLoop() {
   const setRef = useRef<HTMLDivElement | null>(null);
@@ -81,7 +79,7 @@ export default function LogoLoop() {
               height={90}
               className="h-[90px] w-auto object-contain select-none pointer-events-none"
               draggable={false}
-              onLoadingComplete={() => setLoaded((v) => v + 1)}
+              onLoad={() => setLoaded((v) => v + 1)}
             />
           ))}
         </div>

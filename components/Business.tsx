@@ -37,7 +37,9 @@ export default function Business() {
                 spotlightColor={currentColor}
               >
                 <h3 className="text-white text-[28px] font-semibold leading-[1.4] max-w-[270px] text-left break-keep">
-                  <span style={{ color: currentColor }}>{item.emphasis}</span>
+                  <span style={{ color: currentColor }}>
+                    {item.emphasis}&nbsp;
+                  </span>
                   {item.title}
                 </h3>
 

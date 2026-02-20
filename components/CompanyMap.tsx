@@ -1,8 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function CompanyMap() {
+  const [loaded, setLoaded] = useState(false);
+
   // 구글 맵 검색 URL (주소를 기반으로 생성)
   // const mapAddress = encodeURIComponent("서울특별시 용산구 두텁바위로 21");
   // const mapSrc = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${mapAddress}`;
@@ -11,10 +15,22 @@ export default function CompanyMap() {
   const simpleMapSrc =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.5074218844!2d126.9722381126629!3d37.54538887192621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eda266df41%3A0x9a05243698804d59!2z7Ja064uI7LuYIOyjvOyLne2ajOyCrA!5e0!3m2!1sko!2skr!4v1710000000000!5m2!1sko!2skr";
 
+  useEffect(() => {
+    setLoaded(false);
+  }, [simpleMapSrc]);
+
   return (
     <div className="relative w-1/2 mt-6">
+      {/* 지도 로드중 보여줄 스켈레톤 */}
+      {!loaded && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-sm bg-white/10 backdrop-blur-sm border border-white/10">
+          <LoadingSpinner size="lg" color="border-white" />
+        </div>
+      )}
+
       {/* 지도 영역 */}
-      <div className="md:col-span-2 w-full h-full rounded-sm overflow-hidden border border-white/10 grayscale-[0.5] contrast-[1.2]">
+      <div className="md:col-span-2 flex items-center justify-center w-full h-full rounded-sm overflow-hidden border border-white/10 grayscale-[0.5] contrast-[1.2] bg-white/20">
+        {/* {loaded ? ( */}
         <iframe
           src={simpleMapSrc}
           width="100%"
@@ -24,6 +40,7 @@ export default function CompanyMap() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title="회사 위치 지도"
+          onLoad={() => setLoaded(true)}
         ></iframe>
       </div>
 
