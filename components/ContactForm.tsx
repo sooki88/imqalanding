@@ -325,7 +325,7 @@ export default function ContactForm() {
     showEmailError && (form.email.trim() === "" || !isValidEmail);
 
   return (
-    <form onSubmit={onSubmit} className="w-1/2">
+    <form onSubmit={onSubmit} className="w-full lg:w-1/2">
       <fieldset className="mt-6 flex flex-col gap-2">
         <legend className="text-base font-semibold text-white">
           유입 경로

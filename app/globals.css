@@ -161,7 +161,19 @@ body::-webkit-scrollbar {
   }
 
   section {
-    @apply relative w-full flex flex-col items-center justify-center text-center px-6 py-25 overflow-hidden;
+    @apply relative w-full flex flex-col items-center justify-center text-center px-4 md:px-9 py-16 md:py-25 overflow-hidden;
+  }
+
+  h2 {
+    @apply text-white text-3xl md:text-[40px] font-semibold leading-[1.3];
+  }
+
+  h3 {
+    @apply text-[28px] md:text-3xl lg:w-3/4 text-left font-semibold leading-[1.4] break-keep;
+  }
+
+  h4 {
+    @apply text-white text-2xl md:text-[28px] font-semibold leading-[1.4] text-left break-keep;
   }
 }
 
@@ -182,6 +194,14 @@ body::-webkit-scrollbar {
 
   .text-main-blue {
     @apply text-[#0077ff];
+  }
+
+  .only-mobile {
+    @apply block md:hidden;
+  }
+
+  .only-pc {
+    @apply hidden md:block;
   }
 }
 

@@ -8,14 +8,8 @@ import CyclingImage from "./CyclingImage";
 export default function Features() {
   return (
     <section>
-      {/* <Tag>FEATURES</Tag> */}
-
       {/* 타이틀 */}
-      <h2 className="text-white text-[40px] font-semibold leading-[1.3]">
-        {/* 분석의 깊이는 더하고, 문제 해결의 시간은 줄이다 */}
-        단절된 데이터를 넘어 서비스의 전 과정을 관통하다
-        {/* <span className="text-main-gradient">비즈니스</span>를 움직인다 */}
-      </h2>
+      <h2>단절된 데이터를 넘어 서비스의 전 과정을 관통하다</h2>
 
       {FeatureContents.map((item, index) => {
         const currentColor = ColorArray[index % ColorArray.length];
@@ -59,38 +53,32 @@ function Card({
   return (
     <div
       id="features"
-      className={`flex gap-20 w-full max-w-[1200px] items-start ${index == 0 ? "mt-20" : "mt-25"} ${
-        isImageLeft ? "flex-row" : "flex-row-reverse"
+      className={`flex gap-12 md:gap-20 w-full max-w-[1200px] items-start ${index == 0 ? "mt-20" : "mt-25"} ${
+        isImageLeft
+          ? "flex-col-reverse lg:flex-row"
+          : "flex-col-reverse lg:flex-row-reverse"
       }`}
     >
       {/* 이미지 영역: 1:1 + 좌우 동일 너비 */}
-      <div className="w-1/2">
+      <div className="w-full max-w-[580px] lg:w-1/2">
         <div className="w-full aspect-square bg-rgba(255, 255, 255, 0.05) rounded-sm overflow-hidden relative flex items-center justify-center">
-          {/* <CyclingImage
-            images={content.images}
-            alt={content.title?.[1] ?? content.title?.[0] ?? "image"}
-            intervalMs={2000}
-            fadeMs={500}
-          /> */}
           <CyclingImage images={content.images} title={content.title[1]} />
         </div>
       </div>
 
-      <div className="w-1/2 flex flex-col gap-6">
+      <div className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6">
         <span
-          className="text-sm font-semibold leading-[1.5] inline-flex w-fit py border-b"
+          className="text-xs md:text-sm font-semibold leading-[1.5] inline-flex w-fit py border-b"
           style={{ borderColor: color, color }}
         >
           {content.category}
         </span>
 
-        <div>
+        <div className="flex flex-wrap items-baseline gap-x-2 lg:block">
           {content.title.map((title, index) => (
             <h3
               key={title}
-              className={`text-3xl w-3/4 text-left font-semibold leading-[1.4] break-keep ${
-                index === 0 ? "text-slate-300" : "text-white"
-              }`}
+              className={`${index === 0 ? "text-slate-300" : "text-white"}`}
             >
               {title}
             </h3>
@@ -101,7 +89,7 @@ function Card({
           {content.description.map((des) => (
             <p
               key={des}
-              className="text-slate-300 text-lg text-left leading-[1.6] break-keep"
+              className="text-slate-300 text-base md:text-lg text-left leading-[1.6] break-keep"
             >
               {des}
             </p>

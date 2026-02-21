@@ -54,14 +54,29 @@ export default function News() {
       : `transform ${transitionMs}ms ease, opacity ${transitionMs}ms ease`;
 
   return (
-    // <section className="py-0 bg-[rgba(0,119,255,0.5)]">
     <section className="py-0 bg-[rgba(0,119,255,0.5)]">
-      <div className="mx-auto flex w-full max-w-6xl gap-20 py-6 text-white font-light leading-[1.3]">
-        {/* 왼쪽 고정 */}
-        <div className="shrink-0 text-[28px] mt-1 opacity-70">NEWS</div>
+      <div
+        className="
+        mx-auto w-full max-w-6xl
+        flex flex-col lg:flex-row
+        gap-2 lg:gap-20
+        py-6
+        text-white font-light leading-[1.3]
+      "
+      >
+        {/* 라벨 */}
+        <h4 className="text-base lg:text-[28px] shrink-0 mt-0 lg:mt-1 opacity-70 text-left">
+          NEWS
+        </h4>
 
-        {/* 오른쪽: 한 개만 보이는 뷰포트 */}
-        <div className="relative flex-1 overflow-hidden" style={{ height: 72 }}>
+        {/* 슬라이더 */}
+        <div
+          className="
+          relative lg:flex-1 overflow-hidden
+          w-full
+        "
+          style={{ height: 72 }}
+        >
           {/* 현재(위로 사라짐) */}
           <div
             className="absolute inset-0 flex flex-col justify-center gap-2"
@@ -75,13 +90,13 @@ export default function News() {
               willChange: "transform, opacity",
             }}
           >
-            <h3 className="font-medium text-left text-[28px]">
+            <h4 className="font-medium">
               {current.title}
               <span className="ml-3 align-middle text-xs text-slate-400">
                 {current.date}
               </span>
-            </h3>
-            <p className="text-left text-slate-400 text-sm truncate">
+            </h4>
+            <p className="text-left text-slate-400 text-sm truncate only-pc">
               {current.content}
             </p>
           </div>
@@ -99,13 +114,13 @@ export default function News() {
               willChange: "transform, opacity",
             }}
           >
-            <h3 className="font-medium text-left text-[28px]">
+            <h4 className="font-medium">
               {next.title}
               <span className="ml-3 align-middle text-xs text-slate-400">
                 {next.date}
               </span>
-            </h3>
-            <p className="text-left text-slate-400 text-sm truncate">
+            </h4>
+            <p className="text-left text-slate-400 text-sm truncate only-pc">
               {next.content}
             </p>
           </div>

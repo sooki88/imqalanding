@@ -20,7 +20,7 @@ export default function CompanyMap() {
   }, [simpleMapSrc]);
 
   return (
-    <div className="relative w-1/2 mt-6">
+    <div className="relative w-full lg:w-1/2 mt-6">
       {/* 지도 로드중 보여줄 스켈레톤 */}
       {!loaded && (
         <div className="absolute inset-0 z-10 flex items-center justify-center rounded-sm bg-white/10 backdrop-blur-sm border border-white/10">
@@ -29,8 +29,7 @@ export default function CompanyMap() {
       )}
 
       {/* 지도 영역 */}
-      <div className="md:col-span-2 flex items-center justify-center w-full h-full rounded-sm overflow-hidden border border-white/10 grayscale-[0.5] contrast-[1.2] bg-white/20">
-        {/* {loaded ? ( */}
+      <div className="md:col-span-2 flex items-center justify-center w-full h-[500px] lg:h-[762px] rounded-sm overflow-hidden border border-white/10 grayscale-[0.5] contrast-[1.2] bg-white/20">
         <iframe
           src={simpleMapSrc}
           width="100%"
@@ -45,7 +44,7 @@ export default function CompanyMap() {
       </div>
 
       {/* 교통 정보 및 연락처 */}
-      <div className="absolute bottom-0 w-full text-left z-1 p-4">
+      <div className="absolute bottom-0 w-full text-left z-1 p-2 lg:p-4">
         <div className="flex flex-col bg-slate-900/80 p-4 gap-1 rounded-sm">
           {CompanyInfo.map((info) => (
             <div

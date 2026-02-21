@@ -12,10 +12,11 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+    // <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center px-4 md:px-9 overflow-hidden">
+    <section className="min-h-screen">
       {/* 배경 레이어 */}
 
-      <div className="absolute inset-0 z-0 mix-blend-screen">
+      <div className="absolute bottom-[10%] left-0 right-0 md:inset-0 z-0 mix-blend-screen">
         <Threads
           amplitude={2.5}
           distance={0.1}
@@ -24,22 +25,14 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 pointer-events-none flex flex-col items-center justify-center">
-        {/* <h2 className="text-main-gradient text-[56px] font-semibold leading-[1.3]"> */}
-        <h2 className="text-main-gradient text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3]">
+      <div className="relative z-10 pointer-events-none flex flex-col items-center pb-[20%] md:pb-0">
+        <h1 className="text-main-gradient text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3]">
           모바일 앱부터 웹까지
-        </h2>
-        {/* <WaveText
-          text="사용자 경험을 실시간으로 읽다"
-          charDelayMs={120}
-          riseMs={1200}
-          holdMs={2000}
-          offsetPx={18}
-        /> */}
+        </h1>
+
         <SplitText
           text="사용자 경험을 실시간으로 읽다"
-          // className="text-[56px] font-semibold text-white leading-[1.3]"
-          className="text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold text-white leading-[1.3]"
+          className="text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold text-white leading-[1.3]"
           delay={50}
           duration={1.25}
           ease="power3.out"
@@ -50,15 +43,15 @@ export default function Hero() {
           rootMargin="-100px"
           textAlign="center"
           onLetterAnimationComplete={handleAnimationComplete}
-          // showCallback
         />
 
-        <p className="text-white font-normal leading-[1.5] text-xl mt-8 opacity-80">
-          사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고 <br /> 문제를
-          해결하는 데 필요한 핵심 데이터를 확보할 수 있습니다.
+        <p className="text-white font-normal leading-[1.5] text-lg md:text-xl mt-8 opacity-80">
+          사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고
+          <br className="hidden md:block" /> 문제를 해결하는 데 필요한 핵심
+          데이터를 확보할 수 있습니다.
         </p>
 
-        <div className="flex gap-4 mt-12 pointer-events-auto">
+        <div className="flex flex-col md:flex-row gap-4 mt-12 pointer-events-auto">
           <Link
             href="#features"
             className="py-[10px] px-5 border-[0.7px] border-white bg-[rgba(0, 0, 0, 0.05)] rounded-sm text-white text-base font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/10 duration-300 ease-in-out"

@@ -30,6 +30,12 @@
   pointer-events: none;
 }
 
+@media (max-width: 1024px) {
+  .card-spotlight {
+    padding-bottom: 24px;
+  }
+}
+
 .card-spotlight:hover::before,
 .card-spotlight:focus-within::before {
   opacity: 0.6;

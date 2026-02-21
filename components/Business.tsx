@@ -11,13 +11,14 @@ export default function Business() {
     <>
       <section>
         {/* 타이틀 */}
-        <h2 className="text-white text-[40px] font-semibold leading-[1.3]">
-          최적의 사용자 경험은 비즈니스를 움직인다
-          {/* <span className="text-main-gradient">비즈니스</span>를 움직인다 */}
+        <h2>
+          최적의 사용자 경험은 <br className="only-mobile" />
+          비즈니스를 움직인다
         </h2>
         <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-lg text-center">
-          대한민국 대표 금융·보험·이커머스 기업들은 IMQA를 통해 <br /> 사용자
-          경험 품질을 개선하고 고객 만족도를 향상시키고 있습니다.
+          대한민국 대표 금융·보험·이커머스 기업들은 IMQA를 통해{" "}
+          <br className="only-pc" />
+          사용자 경험 품질을 개선하고 고객 만족도를 향상시키고 있습니다.
         </p>
       </section>
 
@@ -26,7 +27,7 @@ export default function Business() {
 
       <section>
         {/* 카드 */}
-        <div className="flex gap-6 -mt-12 w-full max-w-[1200px]">
+        <div className="flex flex-col lg:flex-row gap-6 -mt-12 w-full max-w-[1200px]">
           {BusinessCardContent.map((item, index) => {
             const currentColor = ColorArray[index % ColorArray.length];
 
@@ -36,18 +37,19 @@ export default function Business() {
                 className="custom-spotlight-card group"
                 spotlightColor={currentColor}
               >
-                <h3 className="text-white text-[28px] font-semibold leading-[1.4] max-w-[270px] text-left break-keep">
+                {/* <h4 className="text-white text-[28px] font-semibold leading-[1.4] max-w-[270px] text-left break-keep"> */}
+                <h4 className="pc:max-w-[270px]">
                   <span style={{ color: currentColor }}>
                     {item.emphasis}&nbsp;
                   </span>
                   {item.title}
-                </h3>
+                </h4>
 
                 <div className="flex flex-col gap-2 mt-6">
                   {item.content.map((i, idx) => (
                     <div
                       key={idx}
-                      className="flex gap-2 items-start text-lg text-slate-400 text-left break-keep transition-colors duration-200 delay-0 group-hover:text-white"
+                      className="flex gap-2 items-start text-base md:text-lg text-slate-400 text-left break-keep transition-colors duration-200 delay-0 group-hover:text-white"
                     >
                       <CheckIcon
                         color={currentColor}

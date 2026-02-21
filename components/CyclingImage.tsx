@@ -170,7 +170,6 @@ export default function CyclingImage({
           fill
           className="object-cover"
           sizes="(max-width: 1200px) 50vw, 600px"
-          priority
         />
       </div>
 
