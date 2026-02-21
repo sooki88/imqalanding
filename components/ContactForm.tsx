@@ -39,8 +39,11 @@
 //   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
 //     "idle",
 //   );
-//   const [errorMsg, setErrorMsg] = useState("");
+//   // const [errorMsg, setErrorMsg] = useState("");
 //   const [submitted, setSubmitted] = useState(false);
+
+//   // 이메일 입력 시작 여부
+//   const [emailTouched, setEmailTouched] = useState(false);
 
 //   const isValidEmail = useMemo(
 //     () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()),
@@ -63,14 +66,12 @@
 
 //   const onSubmit = async (e: React.FormEvent) => {
 //     e.preventDefault();
-//     setErrorMsg("");
 //     setSubmitted(true);
 
 //     if (!canSubmit) return;
 
 //     try {
 //       setStatus("sending");
-//       console.log(form);
 
 //       const res = await fetch("/api/contact", {
 //         method: "POST",
@@ -91,14 +92,20 @@
 //       setStatus("sent");
 //       setForm(initialForm);
 //       setSubmitted(false);
+//       setEmailTouched(false); // 초기화
 //     } catch {
 //       setStatus("error");
 //       alert("전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
 //     }
 //   };
 
+//   // “제출 시도했거나 / 이메일 입력을 시작했으면” 에러 검사
+//   const showEmailError = submitted || emailTouched;
+//   const emailError =
+//     showEmailError && (form.email.trim() === "" || !isValidEmail);
+
 //   return (
-//     <form onSubmit={onSubmit} className="w-1/2">
+//     <form onSubmit={onSubmit} className="w-full lg:w-1/2">
 //       <fieldset className="mt-6 flex flex-col gap-2">
 //         <legend className="text-base font-semibold text-white">
 //           유입 경로
@@ -142,8 +149,11 @@
 //         type="email"
 //         placeholder="이메일 주소를 입력해주세요"
 //         value={form.email}
-//         onChange={(v) => update("email", v)}
-//         error={form.email.trim() === "" || !isValidEmail}
+//         onChange={(v) => {
+//           if (!emailTouched) setEmailTouched(true); // 입력 시작 순간부터 검사 ON
+//           update("email", v);
+//         }}
+//         error={emailError}
 //         errorText="유효한 이메일 주소를 입력해주세요"
 //       />
 
@@ -180,13 +190,6 @@
 //         errorText="문의 내용을 입력해주세요"
 //       />
 
-//       {/* {status === "error" && (
-//         <p className="mt-3 text-sm text-red-300">{errorMsg}</p>
-//       )} */}
-//       {/* {status === "sent" && (
-//         <p className="mt-3 text-sm text-emerald-300">전송 완료!</p>
-//       )} */}
-
 //       <label
 //         htmlFor="agree"
 //         className="flex cursor-pointer items-center gap-3 text-white mt-4"
@@ -218,10 +221,12 @@
 //   );
 // }
 
+// 이메일로 보내기
+
 "use client";
 
 import InputWithLabel from "@/components/InputWithLabel";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 type RouteOption = "blog" | "portal" | "facebook" | "seminar" | "press" | "etc";
 
@@ -255,11 +260,12 @@ const initialForm: FormState = {
 };
 
 export default function ContactForm() {
+  const formRef = useRef<HTMLFormElement | null>(null);
+
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
-  // const [errorMsg, setErrorMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   // 이메일 입력 시작 여부
@@ -284,48 +290,58 @@ export default function ContactForm() {
     return companyOk && nameOk && telOk && contentOk && emailOk && agreeOk;
   }, [form, isValidEmail]);
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-
-    if (!canSubmit) return;
-
-    try {
-      setStatus("sending");
-
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          route: form.route,
-          company: form.company,
-          email: form.email.trim(),
-          name: form.name,
-          tel: form.tel,
-          content: form.content,
-          agree: form.agree,
-        }),
-      });
-
-      if (!res.ok) throw new Error("Request failed");
-
-      setStatus("sent");
-      setForm(initialForm);
-      setSubmitted(false);
-      setEmailTouched(false); // 초기화
-    } catch {
-      setStatus("error");
-      alert("전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
-    }
-  };
-
   // “제출 시도했거나 / 이메일 입력을 시작했으면” 에러 검사
   const showEmailError = submitted || emailTouched;
   const emailError =
     showEmailError && (form.email.trim() === "" || !isValidEmail);
 
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+
+    if (!canSubmit) return;
+
+    setStatus("sending");
+    console.log(formRef.current);
+
+    // FormSubmit로 네이티브 submit (action으로 POST)
+    formRef.current?.submit();
+  };
+
   return (
-    <form onSubmit={onSubmit} className="w-full lg:w-1/2">
+    <form
+      ref={formRef}
+      onSubmit={onSubmit}
+      className="w-full lg:w-1/2"
+      action="https://formsubmit.co/shnam@onycom.com"
+      method="POST"
+    >
+      {/* FormSubmit 옵션들 */}
+      <input
+        type="hidden"
+        name="_subject"
+        value={`[문의] ${form.company} / ${form.name}`}
+      />
+      <input type="hidden" name="_captcha" value="true" />
+      {/* 전송 후 이동할 페이지 (본인 도메인으로) */}
+      <input
+        type="hidden"
+        name="_next"
+        value="https://localhost:3000/contact/thanks"
+      />
+      {/* 스팸봇 방지(허니팟) */}
+      {/* <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="_honey" className="hidden" /> */}
+
+      {/* 실제 데이터도 FormSubmit이 읽을 수 있게 name 달기 */}
+      <input type="hidden" name="route" value={form.route} />
+      <input type="hidden" name="company" value={form.company} />
+      <input type="hidden" name="email" value={form.email} />
+      <input type="hidden" name="name" value={form.name} />
+      <input type="hidden" name="tel" value={form.tel} />
+      <input type="hidden" name="content" value={form.content} />
+      {/* <input type="hidden" name="agree" value={form.agree ? "yes" : "no"} /> */}
+
       <fieldset className="mt-6 flex flex-col gap-2">
         <legend className="text-base font-semibold text-white">
           유입 경로

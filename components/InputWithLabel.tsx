@@ -4,6 +4,7 @@ import React from "react";
 
 type CommonProps = {
   id: string;
+  name?: string;
   label: string;
   placeholder?: string;
   value: string;
@@ -28,6 +29,7 @@ type Props = InputProps | TextareaProps;
 export default function InputWithLabel(props: Props) {
   const {
     id,
+    name,
     label,
     placeholder,
     value,
@@ -64,6 +66,7 @@ export default function InputWithLabel(props: Props) {
       {isTextarea ? (
         <textarea
           id={id}
+          name={name ?? id}
           autoComplete={id}
           placeholder={placeholder}
           value={value}
@@ -74,6 +77,7 @@ export default function InputWithLabel(props: Props) {
       ) : (
         <input
           id={id}
+          name={name ?? id}
           type={type === "tel" ? "text" : type}
           inputMode={getInputMode()}
           autoComplete={id}

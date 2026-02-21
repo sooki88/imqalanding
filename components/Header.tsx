@@ -7,7 +7,8 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
 
-  const isContactPage = pathname === "/contact";
+  const isContactPage =
+    pathname === "/contact" || pathname === "/contact/thanks";
 
   return (
     <header className="flex justify-between items-center px-4 md:px-9 h-16 fixed top-0 right-0 left-0 z-50 pointer-events-auto backdrop-blur-sm">
