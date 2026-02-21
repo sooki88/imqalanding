@@ -9,7 +9,7 @@ export default function Solution() {
     <section className="py-0">
       <div className="solution-bg absolute inset-0 -z-1"></div>
       <div className="flex flex-col items-center justify-center w-full py-25">
-        <h3 className="w-5/6 font-semibold text-center">
+        <h3 className="w-full md:w-5/6 font-semibold text-center">
           서비스를 관찰하고 실제 사용자 경험을 분석해보세요 <br />
           수많은 질문에 <strong className="">IMQA</strong>로 답하세요
         </h3>

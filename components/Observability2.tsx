@@ -27,7 +27,7 @@ export default function Observability() {
         Observability를 <br className="only-mobile" />
         프론트엔드에서 시작하다
       </h2>
-      <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-lg text-center">
+      <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-base md:text-lg text-center">
         사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고
         <br className="only-pc" /> 문제를 해결하는 데 필요한 핵심 데이터를
         확보할 수 있습니다.

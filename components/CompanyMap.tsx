@@ -49,14 +49,14 @@ export default function CompanyMap() {
           {CompanyInfo.map((info) => (
             <div
               key={info.text}
-              className="flex items-center gap-2 text-sm leading-[1.5]"
+              className="flex items-start gap-2 text-sm leading-[1.5]"
             >
               <Image
                 src={info.src}
                 alt={info.text}
                 width={16}
                 height={16}
-                priority
+                className="mt-[3px]"
               />
               {info.text}
             </div>

@@ -16,7 +16,7 @@ export default function Hero() {
     <section className="min-h-screen">
       {/* 배경 레이어 */}
 
-      <div className="absolute bottom-[10%] left-0 right-0 md:inset-0 z-0 mix-blend-screen">
+      <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen">
         <Threads
           amplitude={2.5}
           distance={0.1}
@@ -45,7 +45,7 @@ export default function Hero() {
           onLetterAnimationComplete={handleAnimationComplete}
         />
 
-        <p className="text-white font-normal leading-[1.5] text-lg md:text-xl mt-8 opacity-80">
+        <p className="text-white font-normal leading-[1.5] text-base md:text-lg lg:text-xl mt-8 opacity-80">
           사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고
           <br className="hidden md:block" /> 문제를 해결하는 데 필요한 핵심
           데이터를 확보할 수 있습니다.
