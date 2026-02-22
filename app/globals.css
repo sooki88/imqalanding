@@ -125,7 +125,7 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-tml,
+html,
 body {
   -ms-overflow-style: none; /* IE/Edge legacy */
   scrollbar-width: none; /* Firefox */

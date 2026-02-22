@@ -45,11 +45,11 @@ export default function Business() {
                   {item.title}
                 </h4>
 
-                <div className="flex flex-col gap-2 mt-6">
+                <div className="flex flex-col gap-1 lg:gap-2 mt-4 lg:mt-6">
                   {item.content.map((i, idx) => (
                     <div
                       key={idx}
-                      className="flex gap-2 items-start text-sm md:text-base lg:text-lg text-slate-400 text-left break-keep transition-colors duration-200 delay-0 group-hover:text-white"
+                      className="flex gap-2 items-start text-sm md:text-base lg:text-lg text-slate-400 leading-[1.6] text-left break-keep transition-colors duration-200 delay-0 group-hover:text-white"
                     >
                       <CheckIcon
                         color={currentColor}

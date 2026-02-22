@@ -32,7 +32,8 @@
 
 @media (max-width: 1024px) {
   .card-spotlight {
-    padding-bottom: 24px;
+    padding: 20px;
+    padding-bottom: 20px;
   }
 }
 

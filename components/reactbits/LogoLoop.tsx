@@ -77,7 +77,7 @@ export default function LogoLoop() {
               alt={logo.alt}
               width={200}
               height={90}
-              className="h-[90px] w-auto object-contain select-none pointer-events-none"
+              className="h-[70px] lg:h-[90px] w-auto object-contain select-none pointer-events-none"
               draggable={false}
               onLoad={() => setLoaded((v) => v + 1)}
             />
@@ -93,7 +93,7 @@ export default function LogoLoop() {
               alt={logo.alt}
               width={200}
               height={90}
-              className="h-[90px] w-auto object-contain select-none pointer-events-none"
+              className="h-[70px] lg:h-[90px] w-auto object-contain select-none pointer-events-none"
               draggable={false}
             />
           ))}

@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Aurora from "@/components/reactbits/Aurora";
 import FloatingBtn from "@/components/FloatingBtn";
+import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 
 export default function RootLayout({
   children,
@@ -12,25 +13,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="dark">
-      <body className={`${pretendard.variable} antialiased font-sans relative`}>
-        <Header />
-        <div className="fixed inset-0 -z-1">
-          <Aurora
-            colorStops={["#00aeff", "#0011ff", "#6929ff"]}
-            blend={0.5}
-            amplitude={1.0}
-            speed={1}
-          />
-        </div>
+    <ReactQueryClientProvider>
+      <html lang="ko" className="dark">
+        <body
+          className={`${pretendard.variable} antialiased font-sans relative`}
+        >
+          <Header />
+          <div className="fixed inset-0 -z-1">
+            <Aurora
+              colorStops={["#00aeff", "#0011ff", "#6929ff"]}
+              blend={0.5}
+              amplitude={1.0}
+              speed={1}
+            />
+          </div>
 
-        {children}
+          {children}
 
-        <Footer />
+          <Footer />
 
-        <FloatingBtn />
-      </body>
-    </html>
+          <FloatingBtn />
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }
 

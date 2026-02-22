@@ -116,7 +116,7 @@ export default function Observability() {
               <span className="text-base md:text-lg text-white leading-[1.5]">
                 {item.title}
               </span>
-              <span className="text-slate-400 text-xs leading-[1.5] font-light text-left mt-1">
+              <span className="text-slate-400 text-xs leading-[1.6] font-light text-left mt-1">
                 {item.summary}
               </span>
             </div>
