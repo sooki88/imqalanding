@@ -4,13 +4,14 @@ import { useState } from "react";
 
 import AdminInquiryTable from "./AdminInquiryTable";
 import AdminNewsTable from "./AdminNewsTable";
+import AdminClientLogoTable from "./AdminClientLogoTable";
 
-type TabKey = "inquiries" | "news" | "logo";
+type TabKey = "inquiries" | "news" | "clients";
 
 const TAB_LIST: { key: TabKey; label: string }[] = [
   { key: "inquiries", label: "문의" },
   { key: "news", label: "뉴스" },
-  { key: "logo", label: "로고" },
+  { key: "clients", label: "고객사 로고" },
 ];
 
 export default function AdminDashboard() {
@@ -39,15 +40,6 @@ export default function AdminDashboard() {
             </button>
           );
         })}
-        {/* {activeTab !== "inquiries" && (
-          <button
-            type="button"
-            onClick={() => console.log("클릭")}
-            className=""
-          >
-            등록
-          </button>
-        )} */}
       </div>
 
       {/* 탭 내용 */}
@@ -56,11 +48,7 @@ export default function AdminDashboard() {
 
         {activeTab === "news" && <AdminNewsTable />}
 
-        {activeTab === "logo" && (
-          <div className="py-10 text-center text-slate-400">
-            로고 관리 탭 (추가 예정)
-          </div>
-        )}
+        {activeTab === "clients" && <AdminClientLogoTable />}
       </div>
     </div>
   );
