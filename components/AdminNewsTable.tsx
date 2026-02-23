@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import useNewsQuery from "@/hooks/use-news-query";
 import { formatDateTime } from "@/lib/FormatDateTime";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function AdminNewsTable() {
   const newsQuery = useNewsQuery();
@@ -15,8 +16,8 @@ export default function AdminNewsTable() {
   return (
     <div className="space-y-4">
       {newsQuery.isLoading ? (
-        <div className="py-10 text-center text-slate-300">
-          뉴스 데이터를 불러오는 중입니다.
+        <div className="flex items-center justify-center w-full py-10">
+          <LoadingSpinner />
         </div>
       ) : newsQuery.isError ? (
         <div className="py-10 text-center text-red-400">

@@ -7,7 +7,7 @@ import CyclingImage from "./CyclingImage";
 
 export default function Features() {
   return (
-    <section>
+    <section id="features">
       {/* 타이틀 */}
       <h2>단절된 데이터를 넘어 서비스의 전 과정을 관통하다</h2>
 
@@ -52,7 +52,7 @@ function Card({
 
   return (
     <div
-      id="features"
+      // id="features"
       className={`flex gap-12 md:gap-20 w-full max-w-[1200px] items-start ${index == 0 ? "mt-20" : "mt-25"} ${
         isImageLeft
           ? "flex-col-reverse lg:flex-row"

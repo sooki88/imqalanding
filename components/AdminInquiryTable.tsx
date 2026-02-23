@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import useInquiriesQuery from "@/hooks/use-inquiries-query";
 import { formatDateTime } from "@/lib/FormatDateTime";
+import LoadingSpinner from "./LoadingSpinner";
 
 const ROUTE_LABEL_MAP: Record<string, string> = {
   blog: "블로그",
@@ -24,8 +25,8 @@ export default function AdminInquiryTable() {
   return (
     <div className="space-y-4">
       {inquiriesQuery.isLoading ? (
-        <div className="py-10 text-center text-slate-300">
-          문의 데이터를 불러오는 중입니다.
+        <div className="flex items-center justify-center w-full py-10">
+          <LoadingSpinner />
         </div>
       ) : inquiriesQuery.isError ? (
         <div className="py-10 text-center text-red-400">
