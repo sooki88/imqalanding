@@ -29,6 +29,33 @@ export type Database = {
         }
         Relationships: []
       }
+      client_logos: {
+        Row: {
+          alt: string
+          created_at: string
+          id: number
+          image_path: string
+          name: string | null
+          sort_order: number
+        }
+        Insert: {
+          alt: string
+          created_at?: string
+          id?: never
+          image_path: string
+          name?: string | null
+          sort_order?: number
+        }
+        Update: {
+          alt?: string
+          created_at?: string
+          id?: never
+          image_path?: string
+          name?: string | null
+          sort_order?: number
+        }
+        Relationships: []
+      }
       inquiries: {
         Row: {
           company: string

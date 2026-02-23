@@ -1,23 +1,20 @@
 "use client";
 
+import useClientLogosQuery from "@/hooks/use-client-logos-query";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-
-const imageLogos = [
-  { src: "/logo_samsung2.webp", alt: "삼성 로고" },
-  { src: "/logo_financial.webp", alt: "금융결제원 로고" },
-  { src: "/logo_bnk.webp", alt: "부산은행 로고" },
-  { src: "/logo_lina2.webp", alt: "라이나 로고" },
-  { src: "/logo_seomin.webp", alt: "서민금융 로고" },
-  { src: "/logo_cj.webp", alt: "cj 대한통운 로고" },
-  { src: "/logo_dongwon.webp", alt: "동원 로고" },
-  { src: "/logo_seoul.webp", alt: "서울자전거 로고" },
-  { src: "/logo_kangwon.webp", alt: "강원랜드 로고" },
-  { src: "/logo_cardoc.webp", alt: "카닥 로고" },
-  { src: "/logo_aswon.webp", alt: "에스원 로고" },
-];
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function LogoLoop() {
+  const logosQuery = useClientLogosQuery();
+
+  const imageLogos = useMemo(() => {
+    if (!Array.isArray(logosQuery.data)) return [];
+    return logosQuery.data.map((item) => ({
+      src: item.src,
+      alt: item.alt,
+    }));
+  }, [logosQuery.data]);
+
   const setRef = useRef<HTMLDivElement | null>(null);
   const [distance, setDistance] = useState(0);
   const [loaded, setLoaded] = useState(0);
