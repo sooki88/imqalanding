@@ -180,7 +180,9 @@ export default function AdminNewsTable() {
             </thead>
             <tbody>
               {news.map((item: any) => {
-                const isEditing = editing?.id === item.id;
+                const editingRow =
+                  editing && editing.id === item.id ? editing : null;
+                const isEditing = !!editingRow;
 
                 return (
                   <tr
@@ -192,7 +194,7 @@ export default function AdminNewsTable() {
                       {isEditing ? (
                         <input
                           type="text"
-                          value={editing.title}
+                          value={editingRow.title}
                           onChange={(e) =>
                             setEditing((prev) =>
                               prev ? { ...prev, title: e.target.value } : prev,
@@ -212,7 +214,7 @@ export default function AdminNewsTable() {
                       {isEditing ? (
                         <textarea
                           rows={4}
-                          value={editing.content}
+                          value={editingRow.content}
                           onChange={(e) =>
                             setEditing((prev) =>
                               prev
@@ -233,7 +235,7 @@ export default function AdminNewsTable() {
                       {isEditing ? (
                         <input
                           type="date"
-                          value={editing.news_date}
+                          value={editingRow.news_date}
                           onChange={(e) =>
                             setEditing((prev) =>
                               prev
