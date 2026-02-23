@@ -26,7 +26,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center pb-[20%] md:pb-0">
-        <h1 className="text-main-gradient text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3]">
+        <h1 className="text-main-gradient text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3] break-keep">
           모바일 앱부터 웹까지
         </h1>
 
@@ -45,7 +45,7 @@ export default function Hero() {
           onLetterAnimationComplete={handleAnimationComplete}
         />
 
-        <p className="text-white font-normal leading-[1.6] text-base md:text-lg lg:text-xl mt-8 opacity-80">
+        <p className="text-white font-normal leading-[1.6] text-base md:text-lg lg:text-xl mt-8 opacity-80 break-keep">
           사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고
           <br className="hidden md:block" /> 문제를 해결하는 데 필요한 핵심
           데이터를 확보할 수 있습니다.

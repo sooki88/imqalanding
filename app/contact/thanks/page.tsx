@@ -11,21 +11,21 @@ export default function ContactThanks() {
           <br />
           회신이 보이지 않으면 스팸함도 확인해 주세요.
         </p>
-      </div>
 
-      <div className="flex flex-col md:flex-row w-full gap-4">
-        <Link
-          href="/"
-          className="w-32 py-[10px] px-5 border-[0.7px] border-white bg-[rgba(0, 0, 0, 0.05)] rounded-sm text-white text-base text-center font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/10 duration-300 ease-in-out"
-        >
-          홈으로
-        </Link>
-        <Link
-          href="/contact"
-          className="w-32 py-[10px] px-5 border-[0.7px] border-white bg-white rounded-sm text-black font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/90 duration-300 ease-in-out"
-        >
-          다시 문의하기
-        </Link>
+        <div className="flex flex-col md:flex-row w-full gap-4 mt-8">
+          <Link
+            href="/"
+            className="w-32 py-[10px] px-5 border-[0.7px] border-white bg-[rgba(0, 0, 0, 0.05)] rounded-sm text-white text-base text-center font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/10 duration-300 ease-in-out"
+          >
+            홈으로
+          </Link>
+          <Link
+            href="/contact"
+            className="w-32 py-[10px] px-5 border-[0.7px] border-white bg-white rounded-sm text-black font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/90 duration-300 ease-in-out"
+          >
+            다시 문의하기
+          </Link>
+        </div>
       </div>
 
       {/* <div className="flex flex-col lg:flex-row gap-20 w-full max-w-[1200px]"></div> */}

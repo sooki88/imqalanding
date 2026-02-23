@@ -15,7 +15,7 @@ export default function Business() {
           최적의 사용자 경험은 <br className="only-mobile" />
           비즈니스를 움직인다
         </h2>
-        <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-base md:text-lg text-center">
+        <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-base md:text-lg text-center  break-keep">
           대한민국 대표 금융·보험·이커머스 기업들은 IMQA를 통해{" "}
           <br className="only-pc" />
           사용자 경험 품질을 개선하고 고객 만족도를 향상시키고 있습니다.
