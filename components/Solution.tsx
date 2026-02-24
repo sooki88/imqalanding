@@ -5,6 +5,17 @@
 import Link from "next/link";
 
 export default function Solution() {
+  const handleOpenChannelTalk = () => {
+    const ch = (window as any).ChannelIO;
+    if (typeof ch === "function") {
+      ch("showMessenger");
+      return;
+    }
+
+    // 아직 로딩 전이면 안내 (선택)
+    alert("문의창을 준비 중입니다. 잠시 후 다시 시도해주세요.");
+  };
+
   return (
     <section className="py-0">
       <div className="solution-bg absolute inset-0 -z-1"></div>
@@ -15,17 +26,18 @@ export default function Solution() {
         </h3>
         <div className="flex flex-col md:flex-row gap-4 mt-12 pointer-events-auto">
           <Link
-            href="#features"
+            href="/contact"
             className="py-[10px] px-5 border-[0.7px] border-white bg-[rgba(0, 0, 0, 0.05)] rounded-sm text-white text-base font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/10 duration-300 ease-in-out"
           >
             소개서 다운로드
           </Link>
-          <Link
-            href="/contact"
+          <button
+            type="button"
+            onClick={handleOpenChannelTalk}
             className="py-[10px] px-5 border-[0.7px] border-white bg-white rounded-sm text-black font-medium leading-[1.5] backdrop-blur-xs hover:bg-white/90 duration-300 ease-in-out"
           >
             IMQA 문의하기
-          </Link>
+          </button>
         </div>
       </div>
     </section>

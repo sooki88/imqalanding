@@ -38,7 +38,7 @@ export default function Business() {
                 spotlightColor={currentColor}
               >
                 {/* <h4 className="text-white text-[28px] font-semibold leading-[1.4] max-w-[270px] text-left break-keep"> */}
-                <h4 className="pc:max-w-[270px]">
+                <h4 className="lg:max-w-[270px]">
                   <span style={{ color: currentColor }}>
                     {item.emphasis}&nbsp;
                   </span>
