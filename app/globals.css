@@ -207,28 +207,10 @@ body::-webkit-scrollbar {
 
 /* Solution 섹션 배경 줌인 */
 .solution-bg {
-  background-image: url("/solution_bg02.webp");
+  background-image: url("/solution_bg.webp");
   background-size: cover;
   background-position: center;
-  transform: scale(1);
-  animation: solutionZoom 60s ease-in-out infinite alternate;
-  will-change: transform;
   opacity: 0.6;
-}
-
-@keyframes solutionZoom {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.52);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .solution-bg {
-    animation: none;
-  }
 }
 
 /* WaveText에 사용 */

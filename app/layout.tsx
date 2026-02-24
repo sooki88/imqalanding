@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Aurora from "@/components/reactbits/Aurora";
+import { AuroraFix } from "@/components/reactbits/Aurora";
 import FloatingBtn from "@/components/FloatingBtn";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 
@@ -22,14 +22,8 @@ export default function RootLayout({
         >
           <Header />
           <div className="fixed inset-0 -z-1">
-            <Aurora
-              colorStops={["#00aeff", "#0011ff", "#6929ff"]}
-              amplitude={0.5}
-              blend={0.3}
-              speed={0.5}
-              maxDpr={1}
-              targetFps={30}
-            />
+            <AuroraFix className="opacity-90" />
+            {/* <AuroraStatic colorStops={["#00aeff", "#0011ff", "#6929ff"]} /> */}
           </div>
 
           {children}

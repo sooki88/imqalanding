@@ -60,7 +60,7 @@ export default function LogoLoop() {
         className="logo-track flex w-max h-[90px] gap-[100px]"
         style={{
           ["--logo-distance" as any]: `${distance}px`,
-          animation: distance ? `logo-scroll 30s linear infinite` : "none",
+          animation: distance ? `logo-scroll 50s linear infinite` : "none",
           willChange: "transform",
           transform: "translate3d(0,0,0)",
         }}
