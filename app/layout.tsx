@@ -7,6 +7,8 @@ import Aurora from "@/components/reactbits/Aurora";
 import FloatingBtn from "@/components/FloatingBtn";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 
+// 구글 애널리틱스 적용해야함
+
 export default function RootLayout({
   children,
 }: Readonly<{

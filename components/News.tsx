@@ -75,6 +75,24 @@ export default function News() {
       ? "none"
       : `transform ${transitionMs}ms ease, opacity ${transitionMs}ms ease`;
 
+  if (newsQuery.isLoading)
+    <section className="py-0 bg-[rgba(0,119,255,0.5)]">
+      <div
+        className="
+        mx-auto w-full max-w-6xl
+        flex flex-col lg:flex-row
+        gap-2 lg:gap-20
+        py-6
+        text-white font-light leading-[1.3]
+      "
+      >
+        <h4 className="text-base lg:text-[28px] shrink-0 mt-0 lg:mt-1 opacity-70 text-left">
+          NEWS
+        </h4>
+        <LoadingSpinner />
+      </div>
+    </section>;
+
   if (newsQuery.isError) {
     console.error("뉴스 데이터를 불러오지 못했습니다.");
     return null;
