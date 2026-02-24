@@ -67,7 +67,7 @@ export default function FloatingBtn() {
       className="
         fixed bottom-6 right-6 z-[9999]
         h-14 w-14 rounded-full
-        border border-white/15 bg-black/40 backdrop-blur-md
+        border border-white/15 bg-black/40 
         shadow-2xl transition-all duration-300
         hover:scale-110 hover:border-white/30 active:scale-95
       "

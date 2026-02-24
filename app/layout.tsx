@@ -22,9 +22,11 @@ export default function RootLayout({
           <div className="fixed inset-0 -z-1">
             <Aurora
               colorStops={["#00aeff", "#0011ff", "#6929ff"]}
-              blend={0.5}
-              amplitude={1.0}
-              speed={1}
+              amplitude={0.5}
+              blend={0.3}
+              speed={0.5}
+              maxDpr={1}
+              targetFps={30}
             />
           </div>
 

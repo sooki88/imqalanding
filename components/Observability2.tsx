@@ -19,8 +19,6 @@ export default function Observability() {
 
   return (
     <section>
-      {/* <Tag>TELEMETRY</Tag> */}
-
       {/* 타이틀 */}
       {/* <h2 className="text-white text-[40px] font-semibold leading-[1.3]"> */}
       <h2>

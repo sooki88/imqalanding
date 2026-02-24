@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-
-import WaveText from "./WaveText";
 import SplitText from "./reactbits/SplitText";
 import Threads from "./reactbits/Threads";
 
@@ -12,7 +10,6 @@ export default function Hero() {
   };
 
   return (
-    // <section className="relative min-h-screen w-full flex flex-col items-center justify-center text-center px-4 md:px-9 overflow-hidden">
     <section className="min-h-screen">
       {/* 배경 레이어 */}
 
@@ -23,6 +20,7 @@ export default function Hero() {
           enableMouseInteraction={true}
           color={[1, 1, 1]}
         />
+        {/* <Threads color={[1, 1, 1]} amplitude={0.8} distance={0.15} maxDpr={1} /> */}
       </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center pb-[20%] md:pb-0">

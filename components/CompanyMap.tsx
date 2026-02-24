@@ -23,7 +23,7 @@ export default function CompanyMap() {
     <div className="relative w-full lg:w-1/2 mt-6">
       {/* 지도 로드중 보여줄 스켈레톤 */}
       {!loaded && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-sm bg-white/10 backdrop-blur-sm border border-white/10">
+        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-sm bg-white/10 border border-white/10">
           <LoadingSpinner size="lg" color="border-white" />
         </div>
       )}
