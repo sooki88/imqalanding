@@ -12,7 +12,7 @@ export default function Home() {
       <Observability2 />
       <Business />
       <Features />
-      {/* <News /> */}
+      <News />
       <Solution />
     </main>
   );
