@@ -4,6 +4,12 @@ import Link from "next/link";
 import SplitText from "./reactbits/SplitText";
 import WaveLinesCanvas from "./Threads2";
 import Threads from "./reactbits/Threads";
+import LegacyWave from "./Threads3";
+import NoiseWaveLines from "./Threads4";
+import NoiseWaveLinesLite from "./Threads4";
+import SimpleNoiseBezierLine from "./Thread5";
+import SimpleNoiseBezierTrail from "./Thread5";
+import WavesBackground from "./Thread6";
 
 export default function Hero() {
   const handleAnimationComplete = () => {
@@ -19,12 +25,34 @@ export default function Hero() {
         <Threads
           amplitude={2.5}
           distance={0.1}
-          enableMouseInteraction={true}
+          enableMouseInteraction={false}
           color={[1, 1, 1]}
         />
         {/* <WaveLinesCanvas segments={30} speed={0.000135} /> */}
         {/* <Threads amplitude={1} distance={0} enableMouseInteraction /> */}
         {/* <div className="solution-bg absolute inset-0 -z-0"></div> */}
+        {/* <LegacyWave className="absolute inset-0" /> */}
+        {/* <NoiseWaveLinesLite
+          className="absolute inset-0"
+          background="transparent"
+          yCount={40} // 라인 수
+          xCount={34} // 부드러움(점 수)
+          lineAlpha={0.15}
+          lineWidth={1.1}
+          speed={0.6}
+        /> */}
+        {/* <SimpleNoiseBezierTrail
+          // className="absolute inset-0"
+          background="#050018"
+          bumps={5}
+          curveFactor={0.8}
+          amplitude={180}
+          speed={0.002} // 느리게 (기존 0.006보다 느림)
+          lineAlpha={0.16}
+          lineWidth={1}
+          fadeAlpha={0.02} // 잔상 빨리 사라짐 (기존 0.03보다 빠름)
+        /> */}
+        {/* <WavesBackground /> */}
       </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center pb-[20%] md:pb-0">
