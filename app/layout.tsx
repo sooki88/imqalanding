@@ -3,9 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { AuroraFix } from "@/components/reactbits/Aurora";
 import FloatingBtn from "@/components/FloatingBtn";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
+import Aurora from "@/components/reactbits/Aurora";
 
 // 구글 애널리틱스 적용해야함
 
@@ -22,8 +22,7 @@ export default function RootLayout({
         >
           <Header />
           <div className="fixed inset-0 -z-1">
-            <AuroraFix className="opacity-90" />
-            {/* <AuroraStatic colorStops={["#00aeff", "#0011ff", "#6929ff"]} /> */}
+            <Aurora className="opacity-90" />
           </div>
 
           {children}

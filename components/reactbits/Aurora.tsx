@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import React from "react";
 
 interface AuroraProps {
   className?: string;
 }
 
-export function AuroraFix({ className = "" }: AuroraProps) {
+export default function Aurora({ className = "" }: AuroraProps) {
   return (
     <div
       aria-hidden="true"
@@ -16,30 +16,21 @@ export function AuroraFix({ className = "" }: AuroraProps) {
         isolation: "isolate",
       }}
     >
-      {/* 그라데이션 1 (가장 위에 보이는 레이어) */}
+      {/* 아래 레이어: 컬러 그라데이션 */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(99.16% 100% at 10.97% 0%, #006AE3 0%, rgba(0, 102, 212, 0.50) 26.56%, rgba(0, 102, 212, 0.00) 53.12%)",
+            "linear-gradient(270deg, rgba(105, 41, 255, 0.95) 9.52%, #01F 38.95%, rgba(0, 17, 255, 0.90) 64.6%, rgba(0, 174, 255, 0.95) 92.14%)",
         }}
       />
 
-      {/* 그라데이션 2 */}
+      {/* 위 레이어: 검정 오버레이 (위는 투명, 아래로 갈수록 검정) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(99.16% 100% at 73.07% 0%, #1C22D9 0%, rgba(33, 19, 173, 0.90) 24.34%, rgba(59, 28, 217, 0.00) 59.95%)",
-        }}
-      />
-
-      {/* 그라데이션 3 */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(26, 0, 255, 0.50) 0%, rgba(0, 17, 255, 0.00) 12.67%)",
+            "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 60%)",
         }}
       />
     </div>
