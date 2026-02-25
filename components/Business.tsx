@@ -32,34 +32,40 @@ export default function Business() {
             const currentColor = ColorArray[index % ColorArray.length];
 
             return (
-              <SpotlightCard
+              <div
                 key={index}
-                className="custom-spotlight-card group"
-                spotlightColor={currentColor}
+                className="group relative w-full rounded-sm border border-[#1c293d] p-5 lg:p-6 pb-4 lg:pb-18 overflow-hidden bg-[#1e293b]/50"
               >
-                {/* <h4 className="text-white text-[28px] font-semibold leading-[1.4] max-w-[270px] text-left break-keep"> */}
-                <h4 className="lg:max-w-[270px]">
-                  <span style={{ color: currentColor }}>
-                    {item.emphasis}&nbsp;
-                  </span>
-                  {item.title}
-                </h4>
+                {/* hover 시 currentColor / 30% */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300"
+                  style={{ backgroundColor: currentColor }}
+                />
 
-                <div className="flex flex-col gap-1 lg:gap-2 mt-4 lg:mt-6">
-                  {item.content.map((i, idx) => (
-                    <div
-                      key={idx}
-                      className="flex gap-2 items-start text-sm md:text-base lg:text-lg text-slate-400 leading-[1.6] text-left break-keep transition-colors duration-200 delay-0 group-hover:text-white"
-                    >
-                      <CheckIcon
-                        color={currentColor}
-                        className="mt-[2px] md:mt-1 lg-mt-[6px] shrink-0"
-                      />
-                      {i}
-                    </div>
-                  ))}
+                <div className="relative z-10">
+                  <h4 className="lg:max-w-[270px]">
+                    <span style={{ color: currentColor }}>
+                      {item.emphasis}&nbsp;
+                    </span>
+                    {item.title}
+                  </h4>
+
+                  <div className="flex flex-col gap-1 lg:gap-2 mt-4 lg:mt-6">
+                    {item.content.map((i, idx) => (
+                      <div
+                        key={idx}
+                        className="flex gap-2 items-start text-sm md:text-base lg:text-lg text-slate-400 leading-[1.6] text-left break-keep transition-colors duration-200 group-hover:text-white"
+                      >
+                        <CheckIcon
+                          color={currentColor}
+                          className="mt-[2px] md:mt-1 lg:mt-[6px] shrink-0"
+                        />
+                        {i}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </SpotlightCard>
+              </div>
             );
           })}
         </div>

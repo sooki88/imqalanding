@@ -205,43 +205,12 @@ body::-webkit-scrollbar {
   }
 }
 
-/* Solution 섹션 배경 줌인 */
+/* Solution 섹션 배경 */
 .solution-bg {
   background-image: url("/solution_bg.webp");
   background-size: cover;
   background-position: center;
   opacity: 0.6;
-}
-
-/* WaveText에 사용 */
-.wave-text {
-  display: inline-block;
-  white-space: pre;
-}
-
-.wave-char {
-  display: inline-block;
-  will-change: transform, opacity;
-
-  transform: translateY(var(--offset));
-  opacity: 0;
-
-  animation: riseInClean var(--rise-ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(var(--i) * var(--char-delay-ms));
-}
-
-@keyframes riseInClean {
-  0% {
-    transform: translateY(var(--offset));
-    opacity: 0;
-  }
-  65% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 
 /* 로고 무한 루프 */
@@ -255,5 +224,32 @@ body::-webkit-scrollbar {
   }
   100% {
     transform: translate3d(calc(-1 * var(--logo-distance)), 0, 0);
+  }
+}
+
+/* 아래서 위로 올라오는 애니메이션 */
+@keyframes fade-in-up-test {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-up {
+  animation: fade-in-up-test 1s ease-out both !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up,
+  .reveal-up-1,
+  .reveal-up-2,
+  .reveal-up-3 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
