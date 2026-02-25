@@ -150,6 +150,24 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* 모든 input과 textarea의 placeholder 컬러를 강제로 고정 */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important; /* Firefox 대응 */
+  -webkit-text-fill-color: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ) !important; /* Safari/Chrome 대응 */
+}
+
+/* 특정 클래스 내에서만 적용하고 싶다면 */
+.mt-6 input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -228,28 +246,3 @@ body::-webkit-scrollbar {
 }
 
 /* 아래서 위로 올라오는 애니메이션 */
-@keyframes fade-in-up-test {
-  from {
-    opacity: 0;
-    transform: translateY(80px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.reveal-up {
-  animation: fade-in-up-test 1s ease-out both !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal-up,
-  .reveal-up-1,
-  .reveal-up-2,
-  .reveal-up-3 {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}

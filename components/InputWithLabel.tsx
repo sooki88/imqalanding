@@ -49,7 +49,7 @@ export default function InputWithLabel(props: Props) {
   };
 
   const baseClass = `
-    mt-[2px] w-full border-b py-2 text-white placeholder:text-white/30 outline-none transition-all text-base bg-transparent 
+    mt-[2px] w-full border-b py-2 text-white outline-none transition-all text-base bg-transparent 
     autofill:shadow-[0_0_0px_1000px_inset_transparent]
     autofill:text-fill-white
     [-webkit-text-fill-color:white]

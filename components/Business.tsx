@@ -2,8 +2,8 @@
 
 "use client";
 
+import FadeUpOnView from "./FadeUpOnView";
 import LogoLoop from "./reactbits/LogoLoop";
-import SpotlightCard from "./reactbits/SpotlightCard";
 import { ColorArray } from "@/constants/ColorArray";
 
 export default function Business() {
@@ -30,9 +30,11 @@ export default function Business() {
         <div className="flex flex-col lg:flex-row gap-6 -mt-12 w-full max-w-[1200px]">
           {BusinessCardContent.map((item, index) => {
             const currentColor = ColorArray[index % ColorArray.length];
+            const delayTime = index * 100;
 
             return (
-              <div
+              <FadeUpOnView
+                delay={delayTime}
                 key={index}
                 className="group relative w-full rounded-sm border border-[#1c293d] p-5 lg:p-6 pb-4 lg:pb-18 overflow-hidden bg-[#1e293b]/50"
               >
@@ -65,7 +67,7 @@ export default function Business() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </FadeUpOnView>
             );
           })}
         </div>
