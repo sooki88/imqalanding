@@ -231,6 +231,32 @@ textarea::placeholder {
   opacity: 0.6;
 }
 
+/* 테스트용 배경 줌인 */
+.hero-bg-test {
+  background-image: url("/bg_test.webp");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  animation: heroZoom 60s ease-in-out infinite alternate;
+  will-change: transform;
+  opacity: 0.6;
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-bg {
+    animation: none;
+  }
+}
+
 /* 로고 무한 루프 */
 .logo-track:hover {
   animation-play-state: paused;
