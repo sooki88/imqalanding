@@ -14,13 +14,14 @@ export default function Hero() {
     <section className="min-h-screen">
       {/* 배경 레이어 */}
 
-      <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen hero-bg-test">
-        {/* <Threads
+      <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen">
+        {/* <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen hero-bg-test"> */}
+        <Threads
           amplitude={2.5}
           distance={0.1}
           enableMouseInteraction={true}
           color={[1, 1, 1]}
-        /> */}
+        />
         {/* <WaveLinesCanvas segments={30} speed={0.000135} /> */}
         {/* <Threads amplitude={1} distance={0} enableMouseInteraction /> */}
         {/* <div className="solution-bg absolute inset-0 -z-0"></div> */}
