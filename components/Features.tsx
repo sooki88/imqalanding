@@ -4,28 +4,31 @@
 
 import { ColorArray } from "@/constants/ColorArray";
 import CyclingImage from "./CyclingImage";
+import FadeUpOnView from "./FadeUpOnView";
 
 export default function Features() {
   return (
-    <section id="features">
-      {/* 타이틀 */}
-      <h2>단절된 데이터를 넘어 서비스의 전 과정을 관통하다</h2>
+    <FadeUpOnView delay={50}>
+      <section id="features">
+        {/* 타이틀 */}
+        <h2>단절된 데이터를 넘어 서비스의 전 과정을 관통하다</h2>
 
-      {FeatureContents.map((item, index) => {
-        const currentColor = ColorArray[index % ColorArray.length];
-        const direction = index % 2 === 0 ? "left" : "right";
+        {FeatureContents.map((item, index) => {
+          const currentColor = ColorArray[index % ColorArray.length];
+          const direction = index % 2 === 0 ? "left" : "right";
 
-        return (
-          <Card
-            key={`${item.category}-${index}`}
-            color={currentColor}
-            direction={direction}
-            content={item}
-            index={index}
-          />
-        );
-      })}
-    </section>
+          return (
+            <Card
+              key={`${item.category}-${index}`}
+              color={currentColor}
+              direction={direction}
+              content={item}
+              index={index}
+            />
+          );
+        })}
+      </section>
+    </FadeUpOnView>
   );
 }
 

@@ -4,6 +4,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import FadeUpOnView from "./FadeUpOnView";
 
 const steps = ["step1", "step2", "step3", "step4"];
 
@@ -18,110 +19,112 @@ export default function Observability() {
   }, []);
 
   return (
-    <section>
-      {/* 타이틀 */}
-      {/* <h2 className="text-white text-[40px] font-semibold leading-[1.3]"> */}
-      <h2>
-        Observability를 <br className="only-mobile" />
-        프론트엔드에서 시작하다
-      </h2>
-      <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-base md:text-lg text-center  break-keep">
-        사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고
-        <br className="only-pc" /> 문제를 해결하는 데 필요한 핵심 데이터를
-        확보할 수 있습니다.
-      </p>
-      {/* front-end */}
-      <Step
-        number="01"
-        title="Front-end"
-        className="mt-14"
-        active={active == 0}
-      >
-        {FrontEndImages.map((img) => (
-          <div key={img.alt} className="relative w-8 md:w-10 h-8 md:h-10">
+    <FadeUpOnView delay={50}>
+      <section>
+        {/* 타이틀 */}
+        {/* <h2 className="text-white text-[40px] font-semibold leading-[1.3]"> */}
+        <h2>
+          Observability를 <br className="only-mobile" />
+          프론트엔드에서 시작하다
+        </h2>
+        <p className="mt-6 text-slate-400 font-normal leading-[1.6] text-base md:text-lg text-center  break-keep">
+          사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고
+          <br className="only-pc" /> 문제를 해결하는 데 필요한 핵심 데이터를
+          확보할 수 있습니다.
+        </p>
+        {/* front-end */}
+        <Step
+          number="01"
+          title="Front-end"
+          className="mt-14"
+          active={active == 0}
+        >
+          {FrontEndImages.map((img) => (
+            <div key={img.alt} className="relative w-8 md:w-10 h-8 md:h-10">
+              <Image
+                fill
+                src={img.src}
+                alt={img.alt}
+                sizes="(max-width: 768px) 32px, 40px"
+                className="object-contain"
+              />
+            </div>
+          ))}
+        </Step>
+
+        <Line />
+
+        {/* 02 SDK/Agent */}
+        <Step number="02" title="SDK/Agent" active={active == 1}>
+          <div className="relative w-[90px] md:w-[95px] aspect-[90/21]">
             <Image
               fill
-              src={img.src}
-              alt={img.alt}
-              sizes="(max-width: 768px) 32px, 40px"
+              src="/imqa_logo_wht.svg"
+              alt="IMQA logo"
+              sizes="(max-width: 768px) 90px, 95px"
               className="object-contain"
             />
           </div>
-        ))}
-      </Step>
-
-      <Line />
-
-      {/* 02 SDK/Agent */}
-      <Step number="02" title="SDK/Agent" active={active == 1}>
-        <div className="relative w-[90px] md:w-[95px] aspect-[90/21]">
           <Image
-            fill
-            src="/imqa_logo_wht.svg"
-            alt="IMQA logo"
-            sizes="(max-width: 768px) 90px, 95px"
-            className="object-contain"
+            src="/icon_close_wht.svg"
+            alt="X 아이콘"
+            width={20}
+            height={20}
+            priority
           />
-        </div>
-        <Image
-          src="/icon_close_wht.svg"
-          alt="X 아이콘"
-          width={20}
-          height={20}
-          priority
-        />
-        <div className="-ml-1 mb-2 relative w-[127px] md:w-[133px] aspect-[127/44]">
-          <Image
-            fill
-            src="/open_telemetry.webp"
-            alt="open telemetry"
-            sizes="(max-width: 768px) 127px, 133px"
-            className="object-contain"
-          />
-        </div>
-      </Step>
+          <div className="-ml-1 mb-2 relative w-[127px] md:w-[133px] aspect-[127/44]">
+            <Image
+              fill
+              src="/open_telemetry.webp"
+              alt="open telemetry"
+              sizes="(max-width: 768px) 127px, 133px"
+              className="object-contain"
+            />
+          </div>
+        </Step>
 
-      <Line />
+        <Line />
 
-      {/* 03 Data Sources */}
-      <Step number="03" title="Data Sources" active={active == 2}>
-        <div className="flex flex-wrap gap-x-8 gap-y-1 max-w-[600px] justify-center my-1 md:my-2">
-          {DataSources.map((item) => (
-            <span
-              key={item}
-              className="text-base md:text-lg text-white leading-[1.5]"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-      </Step>
-
-      <Line />
-
-      {/* 04 IMQA Observability Solution */}
-      <Step
-        number="04"
-        title="IMQA Observability Solution"
-        active={active == 3}
-      >
-        <div className="flex flex-wrap gap-x-6 gap-y-4 max-w-[620px] justify-center my-1 md:my-2">
-          {ObservabilitySolution.map((item) => (
-            <div
-              key={item.title}
-              className="flex flex-col w-full max-w-[260px] md:max-w-[130px] items-start"
-            >
-              <span className="text-base md:text-lg text-white leading-[1.5]">
-                {item.title}
+        {/* 03 Data Sources */}
+        <Step number="03" title="Data Sources" active={active == 2}>
+          <div className="flex flex-wrap gap-x-8 gap-y-1 max-w-[600px] justify-center my-1 md:my-2">
+            {DataSources.map((item) => (
+              <span
+                key={item}
+                className="text-base md:text-lg text-white leading-[1.5]"
+              >
+                {item}
               </span>
-              <span className="text-slate-400 text-xs leading-[1.6] font-light text-left mt-1">
-                {item.summary}
-              </span>
-            </div>
-          ))}
-        </div>
-      </Step>
-    </section>
+            ))}
+          </div>
+        </Step>
+
+        <Line />
+
+        {/* 04 IMQA Observability Solution */}
+        <Step
+          number="04"
+          title="IMQA Observability Solution"
+          active={active == 3}
+        >
+          <div className="flex flex-wrap gap-x-6 gap-y-4 max-w-[620px] justify-center my-1 md:my-2">
+            {ObservabilitySolution.map((item) => (
+              <div
+                key={item.title}
+                className="flex flex-col w-full max-w-[260px] md:max-w-[130px] items-start"
+              >
+                <span className="text-base md:text-lg text-white leading-[1.5]">
+                  {item.title}
+                </span>
+                <span className="text-slate-400 text-xs leading-[1.6] font-light text-left mt-1">
+                  {item.summary}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Step>
+      </section>
+    </FadeUpOnView>
   );
 }
 

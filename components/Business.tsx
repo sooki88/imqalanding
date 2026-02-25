@@ -8,7 +8,7 @@ import { ColorArray } from "@/constants/ColorArray";
 
 export default function Business() {
   return (
-    <>
+    <FadeUpOnView delay={50} className="w-full">
       <section>
         {/* 타이틀 */}
         <h2>
@@ -30,11 +30,9 @@ export default function Business() {
         <div className="flex flex-col lg:flex-row gap-6 -mt-12 w-full max-w-[1200px]">
           {BusinessCardContent.map((item, index) => {
             const currentColor = ColorArray[index % ColorArray.length];
-            const delayTime = index * 100;
 
             return (
-              <FadeUpOnView
-                delay={delayTime}
+              <div
                 key={index}
                 className="group relative w-full rounded-sm border border-[#1c293d] p-5 lg:p-6 pb-4 lg:pb-18 overflow-hidden bg-[#1e293b]/50"
               >
@@ -67,12 +65,12 @@ export default function Business() {
                     ))}
                   </div>
                 </div>
-              </FadeUpOnView>
+              </div>
             );
           })}
         </div>
       </section>
-    </>
+    </FadeUpOnView>
   );
 }
 
