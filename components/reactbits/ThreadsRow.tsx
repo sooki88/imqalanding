@@ -1,13 +1,16 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 
-interface ThreadsProps {
+interface ThreadsRowProps {
   color?: [number, number, number];
   amplitude?: number;
   distance?: number;
   enableMouseInteraction?: boolean;
 }
 
+/** vertex는 그대로 */
 const vertexShader = `
 attribute vec2 position;
 attribute vec2 uv;
@@ -18,6 +21,12 @@ void main() {
 }
 `;
 
+/**
+ * ✅ 핵심 변경점:
+ * - const int u_line_count 제거
+ * - uniform int uLineCount 추가
+ * - for-loop는 최대치(MAX_LINES)로 고정하고, i >= uLineCount면 break
+ */
 const fragmentShader = `
 precision highp float;
 
@@ -27,10 +36,11 @@ uniform vec3 uColor;
 uniform float uAmplitude;
 uniform float uDistance;
 uniform vec2 uMouse;
+uniform int uLineCount;
 
 #define PI 3.1415926538
+#define MAX_LINES 40
 
-const int u_line_count = 40;
 const float u_line_width = 7.0;
 const float u_line_blur = 10.0;
 
@@ -59,7 +69,7 @@ float pixel(float count, vec2 resolution) {
     return (1.0 / max(resolution.x, resolution.y)) * count;
 }
 
-float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float time, float amplitude, float distance) {
+float lineFn(vec2 st, float width, float perc, vec2 mouse, float time, float amplitude, float distance) {
     float split_offset = (perc * 0.4);
     float split_point = 0.1 + split_offset;
 
@@ -102,13 +112,15 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
 
     float line_strength = 1.0;
-    for (int i = 0; i < u_line_count; i++) {
-        float p = float(i) / float(u_line_count);
+
+    for (int i = 0; i < MAX_LINES; i++) {
+        if (i >= uLineCount) break;
+
+        float p = float(i) / float(uLineCount);
         line_strength *= (1.0 - lineFn(
             uv,
             u_line_width * pixel(1.0, iResolution.xy) * (1.0 - p),
             p,
-            (PI * 1.0) * p,
             uMouse,
             iTime,
             uAmplitude,
@@ -125,7 +137,30 @@ void main() {
 }
 `;
 
-const Threads: React.FC<ThreadsProps> = ({
+type PerfTier = "HIGH" | "LOW";
+
+function detectPerfTier(): PerfTier {
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+  if (prefersReduced) return "LOW";
+
+  const hc =
+    typeof navigator !== "undefined" ? (navigator.hardwareConcurrency ?? 4) : 4;
+
+  const dm =
+    typeof navigator !== "undefined"
+      ? ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8)
+      : 8;
+
+  const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+
+  if (hc <= 4 || dm <= 4 || dpr >= 2) return "LOW";
+  return "HIGH";
+}
+
+const ThreadsRow: React.FC<ThreadsRowProps> = ({
   color = [1, 1, 1],
   amplitude = 1,
   distance = 0,
@@ -135,101 +170,216 @@ const Threads: React.FC<ThreadsProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number>(0);
 
+  const isVisibleRef = useRef(true);
+  const isRunningRef = useRef(false);
+
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
 
+    const tier = detectPerfTier();
+
+    const perf =
+      tier === "LOW"
+        ? {
+            renderScale: 0.7,
+            dprCap: 1.25,
+            targetFps: 30,
+            lineCount: 18,
+            mouseSmoothing: 0.08,
+          }
+        : {
+            renderScale: 0.85,
+            dprCap: 1.75,
+            targetFps: 45,
+            lineCount: 32,
+            mouseSmoothing: 0.05,
+          };
+
     const renderer = new Renderer({ alpha: true });
     const gl = renderer.gl;
+
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    // ✅ canvas가 컨테이너를 "레이아웃상" 꽉 채우도록
+    gl.canvas.style.position = "absolute";
+    gl.canvas.style.inset = "0";
+    gl.canvas.style.display = "block";
+
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
+
     const program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
-        iResolution: {
-          value: new Color(
-            gl.canvas.width,
-            gl.canvas.height,
-            gl.canvas.width / gl.canvas.height,
-          ),
-        },
+        iResolution: { value: new Color(1, 1, 1) },
         uColor: { value: new Color(...color) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
+        uLineCount: { value: perf.lineCount },
       },
     });
 
     const mesh = new Mesh(gl, { geometry, program });
 
-    function resize() {
+    // ✅ 1) 렌더링 해상도 낮추기 + setSize가 style을 덮어쓰는 문제 해결
+    const resize = () => {
       const { clientWidth, clientHeight } = container;
-      renderer.setSize(clientWidth, clientHeight);
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
-    }
-    window.addEventListener("resize", resize);
+      if (clientWidth <= 0 || clientHeight <= 0) return;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, perf.dprCap);
+
+      // 내부 렌더 버퍼(=GPU 비용)는 줄임
+      const scaledW = Math.max(
+        1,
+        Math.floor(clientWidth * perf.renderScale * dpr),
+      );
+      const scaledH = Math.max(
+        1,
+        Math.floor(clientHeight * perf.renderScale * dpr),
+      );
+
+      renderer.setSize(scaledW, scaledH);
+
+      // ✅ 중요: 보여지는 크기는 컨테이너 크기로 "강제"
+      // (ogl의 setSize가 canvas.style.width/height를 px로 덮어써버리기 때문)
+      gl.canvas.style.width = `${clientWidth}px`;
+      gl.canvas.style.height = `${clientHeight}px`;
+
+      program.uniforms.iResolution.value.r = scaledW;
+      program.uniforms.iResolution.value.g = scaledH;
+      program.uniforms.iResolution.value.b = scaledW / scaledH;
+    };
+
+    let resizeTimer: number | undefined;
+    const onResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(resize, 100);
+    };
+    window.addEventListener("resize", onResize, { passive: true });
     resize();
 
-    let currentMouse = [0.5, 0.5];
-    let targetMouse = [0.5, 0.5];
+    // 마우스(옵션)
+    let currentMouse: [number, number] = [0.5, 0.5];
+    let targetMouse: [number, number] = [0.5, 0.5];
 
-    function handleMouseMove(e: MouseEvent) {
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
       const y = 1.0 - (e.clientY - rect.top) / rect.height;
       targetMouse = [x, y];
-    }
-    function handleMouseLeave() {
+    };
+
+    const handleMouseLeave = () => {
       targetMouse = [0.5, 0.5];
-    }
+    };
+
     if (enableMouseInteraction) {
-      container.addEventListener("mousemove", handleMouseMove);
-      container.addEventListener("mouseleave", handleMouseLeave);
+      container.addEventListener("mousemove", handleMouseMove, {
+        passive: true,
+      });
+      container.addEventListener("mouseleave", handleMouseLeave, {
+        passive: true,
+      });
     }
 
-    function update(t: number) {
+    // ✅ 4) 보일 때만 돌리기
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisibleRef.current = !!entry?.isIntersecting;
+
+        if (isVisibleRef.current && !isRunningRef.current) {
+          isRunningRef.current = true;
+          lastFrameTime = 0;
+          animationFrameId.current = requestAnimationFrame(update);
+        }
+      },
+      { root: null, threshold: 0.01 },
+    );
+    io.observe(container);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        isVisibleRef.current = false;
+      } else {
+        isVisibleRef.current = true;
+        if (!isRunningRef.current) {
+          isRunningRef.current = true;
+          lastFrameTime = 0;
+          animationFrameId.current = requestAnimationFrame(update);
+        }
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    // ✅ 2) FPS 제한
+    const targetInterval = 1000 / perf.targetFps;
+    let lastFrameTime = 0;
+
+    const update = (t: number) => {
+      if (!isVisibleRef.current) {
+        isRunningRef.current = false;
+        return;
+      }
+
+      if (lastFrameTime && t - lastFrameTime < targetInterval) {
+        animationFrameId.current = requestAnimationFrame(update);
+        return;
+      }
+      lastFrameTime = t;
+
       if (enableMouseInteraction) {
-        const smoothing = 0.05;
-        currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0]);
-        currentMouse[1] += smoothing * (targetMouse[1] - currentMouse[1]);
+        const s = perf.mouseSmoothing;
+        currentMouse[0] += s * (targetMouse[0] - currentMouse[0]);
+        currentMouse[1] += s * (targetMouse[1] - currentMouse[1]);
         program.uniforms.uMouse.value[0] = currentMouse[0];
         program.uniforms.uMouse.value[1] = currentMouse[1];
       } else {
         program.uniforms.uMouse.value[0] = 0.5;
         program.uniforms.uMouse.value[1] = 0.5;
       }
+
       program.uniforms.iTime.value = t * 0.001;
 
       renderer.render({ scene: mesh });
       animationFrameId.current = requestAnimationFrame(update);
-    }
+    };
+
+    isRunningRef.current = true;
     animationFrameId.current = requestAnimationFrame(update);
 
     return () => {
       if (animationFrameId.current)
         cancelAnimationFrame(animationFrameId.current);
-      window.removeEventListener("resize", resize);
+
+      window.clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
+
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+
+      io.disconnect();
 
       if (enableMouseInteraction) {
         container.removeEventListener("mousemove", handleMouseMove);
         container.removeEventListener("mouseleave", handleMouseLeave);
       }
+
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, [color, amplitude, distance, enableMouseInteraction]);
 
+  // ✅ 캔버스 absolute로 깔았으니 부모는 relative + 크기 확실히
   return (
     <div ref={containerRef} className="w-full h-full relative" {...rest} />
   );
 };
 
-export default Threads;
+export default ThreadsRow;

@@ -27,10 +27,13 @@ export default function WavesBackground({
     const el = canvasRef.current;
     if (!el) return;
 
+    const parent = el.parentElement;
+    if (!parent) return;
+
     const ctx = el.getContext("2d", { desynchronized: true });
     if (!ctx) return;
 
-    // ===== 기본 옵션 (원본 기반) =====
+    // ===== 기본 옵션 =====
     const base = {
       speed: 6,
       amplitude: 50,
@@ -47,42 +50,11 @@ export default function WavesBackground({
     let waveLeft = 0;
     let time = 0;
     let rafId = 0;
-    let resizeTimer: number | undefined;
 
     const DPR_CAP = 1.75;
 
-    // const waves: WaveConfig[] = [
-    //   // 메인 웨이브
-    //   { amplitude: 150, wavelength: 200, segmentLength: 20, lineWidth: 2 },
-    //   {
-    //     speed: 0.02,
-    //     amplitude: -150,
-    //     wavelength: 200,
-    //     segmentLength: 20,
-    //     lineWidth: 1.5,
-    //   },
-
-    //   // 보조 웨이브
-    //   {
-    //     speed: 0.2,
-    //     amplitude: 100,
-    //     wavelength: 150,
-    //     lineWidth: 1.2,
-    //     timeModifier: 0.8,
-    //   },
-    //   { amplitude: -100, wavelength: 150, lineWidth: 1.0, timeModifier: 0.7 },
-
-    //   // 고주파
-    //   { amplitude: 80, wavelength: 80, segmentLength: 15, lineWidth: 0.8 },
-    //   { amplitude: -80, wavelength: 80, segmentLength: 15, lineWidth: 0.6 },
-
-    //   // 배경 라인
-    //   { amplitude: 50, wavelength: 300, lineWidth: 0.5, timeModifier: 0.5 },
-    //   { amplitude: -50, wavelength: 300, lineWidth: 0.4, timeModifier: 0.4 },
-    // ];
-
     const waves: WaveConfig[] = [
-      // 메인 웨이브 (더 크게)
+      // 메인 웨이브
       { amplitude: 260, wavelength: 220, segmentLength: 20, lineWidth: 2.2 },
       {
         speed: 0.02,
@@ -111,27 +83,26 @@ export default function WavesBackground({
       { amplitude: -90, wavelength: 340, lineWidth: 0.5, timeModifier: 0.4 },
     ];
 
-    const resizeWidth = () => {
+    const resizeToParent = () => {
       dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
 
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      const cssW = Math.max(1, Math.floor(rect.width));
+      const cssH = Math.max(1, Math.floor(rect.height));
 
-      width = Math.max(1, Math.floor(vw * dpr));
-      height = Math.max(1, Math.floor(vh * dpr));
+      width = Math.max(1, Math.floor(cssW * dpr));
+      height = Math.max(1, Math.floor(cssH * dpr));
 
       el.width = width;
       el.height = height;
-      el.style.width = `${vw}px`;
-      el.style.height = `${vh}px`;
+      el.style.width = `${cssW}px`;
+      el.style.height = `${cssH}px`;
 
-      // 내부 계산은 dpr 포함 좌표계 기준 (원본 로직 유지)
       waveWidth = width * 0.95;
       waveLeft = width * 0.025;
     };
 
     const applyResizeStyles = () => {
-      // 각 웨이브에 그라디언트 적용
       waves.forEach((wave, index) => {
         const gradient = ctx.createLinearGradient(0, 0, width, 0);
 
@@ -163,7 +134,9 @@ export default function WavesBackground({
     };
 
     const drawSine = (t: number, options: WaveConfig) => {
-      const yAxis = height / 2;
+      // ✅ "중앙"이 아니라 부모 영역 기준으로 y축 잡기
+      // 하단에 배치하고 싶으면 0.5 -> 0.8 같은 값으로 내리면 됨
+      const yAxis = height * 0.7;
 
       ctx.lineWidth = (options.lineWidth ?? base.lineWidth) * dpr;
       ctx.strokeStyle = (options.strokeStyle ?? base.strokeStyle) as
@@ -201,13 +174,17 @@ export default function WavesBackground({
       rafId = window.requestAnimationFrame(loop);
     };
 
-    const onResize = () => {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => {
-        resizeWidth();
-        applyResizeStyles();
-      }, 80);
-    };
+    // ✅ 부모 사이즈 변경 대응: ResizeObserver가 정답
+    const ro = new ResizeObserver(() => {
+      resizeToParent();
+      applyResizeStyles();
+    });
+
+    resizeToParent();
+    applyResizeStyles();
+    rafId = window.requestAnimationFrame(loop);
+
+    ro.observe(parent);
 
     const onVisibilityChange = () => {
       if (document.hidden) {
@@ -216,19 +193,12 @@ export default function WavesBackground({
         rafId = window.requestAnimationFrame(loop);
       }
     };
-
-    resizeWidth();
-    applyResizeStyles();
-    rafId = window.requestAnimationFrame(loop);
-
-    window.addEventListener("resize", onResize, { passive: true });
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     return () => {
       window.cancelAnimationFrame(rafId);
-      window.clearTimeout(resizeTimer);
-      window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      ro.disconnect();
     };
   }, [background]);
 
@@ -237,9 +207,11 @@ export default function WavesBackground({
       ref={canvasRef}
       className={className}
       style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
         display: "block",
+        width: "100%",
+        height: "100%",
       }}
       aria-hidden="true"
     />

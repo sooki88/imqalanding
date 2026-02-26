@@ -2,74 +2,18 @@
 
 import Link from "next/link";
 import SplitText from "./reactbits/SplitText";
-import WaveLinesCanvas from "./Threads2";
-import Threads from "./reactbits/Threads";
-import LegacyWave from "./Threads3";
-import NoiseWaveLines from "./Threads4";
-import NoiseWaveLinesLite from "./Threads4";
-import SimpleNoiseBezierLine from "./Thread5";
-import SimpleNoiseBezierTrail from "./Thread5";
 import WavesBackground from "./Thread6";
-import ThreadsRow from "./reactbits/ThreadsRow";
-import ThreadsMd from "./reactbits/ThreadsMd";
 
-export default function Hero() {
+export default function Hero2() {
   const handleAnimationComplete = () => {
     console.log("All letters have animated!");
   };
 
   return (
-    <section className="min-h-screen">
+    <section className="min-h-screen justify-start py-50">
       {/* 배경 레이어 */}
 
       {/* <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen"> */}
-      <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 opacity-70">
-        {/* <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen hero-bg-test"> */}
-        {/* <div className="absolute left-0 right-0 inset-0 z-0 mix-blend-screen hero-bg-test1"> */}
-        {/* <Threads
-          amplitude={2.5}
-          distance={0.1}
-          enableMouseInteraction={false}
-          color={[1, 1, 1]}
-        /> */}
-        <ThreadsMd
-          amplitude={2.5}
-          distance={0.1}
-          enableMouseInteraction={false}
-          color={[1, 1, 1]}
-        />
-        {/* <ThreadsRow
-          amplitude={2.5}
-          distance={0.1}
-          enableMouseInteraction={false}
-          color={[1, 1, 1]}
-        /> */}
-        {/* <WaveLinesCanvas segments={30} speed={0.000135} /> */}
-        {/* <Threads amplitude={1} distance={0} enableMouseInteraction /> */}
-        {/* <div className="solution-bg absolute inset-0 -z-0"></div> */}
-        {/* <LegacyWave className="absolute inset-0" /> */}
-        {/* <NoiseWaveLinesLite
-          className="absolute inset-0 opacity-70"
-          background="transparent"
-          yCount={40} // 라인 수
-          xCount={50} // 부드러움(점 수)
-          lineAlpha={0.15}
-          lineWidth={1.1}
-          speed={0.1}
-        /> */}
-        {/* <SimpleNoiseBezierTrail
-          // className="absolute inset-0"
-          background="#050018"
-          bumps={5}
-          curveFactor={0.8}
-          amplitude={180}
-          speed={0.002} // 느리게 (기존 0.006보다 느림)
-          lineAlpha={0.16}
-          lineWidth={1}
-          fadeAlpha={0.02} // 잔상 빨리 사라짐 (기존 0.03보다 빠름)
-        /> */}
-        {/* <WavesBackground /> */}
-      </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center pb-[20%] md:pb-0">
         <h1 className="text-main-gradient text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3] break-keep">
@@ -111,6 +55,10 @@ export default function Hero() {
             IMQA 도입 문의하기
           </Link>
         </div>
+      </div>
+
+      <div className="pointer-events-none absolute left-0 right-0 bottom-[8%] h-[40vh] md:h-[45vh]">
+        <WavesBackground />
       </div>
     </section>
   );

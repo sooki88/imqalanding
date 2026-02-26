@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 
@@ -125,7 +127,7 @@ void main() {
 }
 `;
 
-const Threads: React.FC<ThreadsProps> = ({
+const ThreadsMd: React.FC<ThreadsProps> = ({
   color = [1, 1, 1],
   amplitude = 1,
   distance = 0,
@@ -141,9 +143,16 @@ const Threads: React.FC<ThreadsProps> = ({
 
     const renderer = new Renderer({ alpha: true });
     const gl = renderer.gl;
+
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    // 캔버스가 레이아웃을 방해하지 않도록
+    gl.canvas.style.display = "block";
+    gl.canvas.style.width = "100%";
+    gl.canvas.style.height = "100%";
+
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
@@ -168,18 +177,58 @@ const Threads: React.FC<ThreadsProps> = ({
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    // ===== Perf metrics (15초마다 출력) =====
+    const METRICS_WINDOW_MS = 15000;
+    let mStart = performance.now();
+    let lastT: number | null = null;
+    let frames = 0;
+    let dropped = 0;
+    const frameTimes: number[] = [];
+
+    // 60fps 기준 16.7ms. 배경 애니 기준이면 33.3ms로 바꿔도 됨.
+    const budgetMs = 16.7;
+
+    // ===== 해상도 스케일 설정 =====
+    const renderScale = 0.85;
+    const dprCap = 1.0;
+
+    let loggedOnce = false;
+
     function resize() {
       const { clientWidth, clientHeight } = container;
-      renderer.setSize(clientWidth, clientHeight);
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+      if (clientWidth <= 0 || clientHeight <= 0) return;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
+
+      const scaledW = Math.max(1, Math.floor(clientWidth * renderScale * dpr));
+      const scaledH = Math.max(1, Math.floor(clientHeight * renderScale * dpr));
+
+      // 내부 버퍼(=GPU 비용)는 scaledW/H로
+      renderer.setSize(scaledW, scaledH);
+
+      // ogl이 px로 덮어쓰는 경우가 있어서, 화면은 항상 꽉 차게 강제
+      gl.canvas.style.width = `${clientWidth}px`;
+      gl.canvas.style.height = `${clientHeight}px`;
+
+      // 셰이더에도 실제 버퍼 해상도 전달
+      program.uniforms.iResolution.value.r = scaledW;
+      program.uniforms.iResolution.value.g = scaledH;
+      program.uniforms.iResolution.value.b = scaledW / scaledH;
+
+      if (!loggedOnce) {
+        loggedOnce = true;
+        console.log("canvas buffer:", gl.canvas.width, gl.canvas.height);
+        console.log("css size:", gl.canvas.clientWidth, gl.canvas.clientHeight);
+        console.log("device dpr:", window.devicePixelRatio, "capped:", dpr);
+        console.log("renderScale:", renderScale, "dprCap:", dprCap);
+      }
     }
+
     window.addEventListener("resize", resize);
     resize();
 
-    let currentMouse = [0.5, 0.5];
-    let targetMouse = [0.5, 0.5];
+    let currentMouse: [number, number] = [0.5, 0.5];
+    let targetMouse: [number, number] = [0.5, 0.5];
 
     function handleMouseMove(e: MouseEvent) {
       const rect = container.getBoundingClientRect();
@@ -187,15 +236,62 @@ const Threads: React.FC<ThreadsProps> = ({
       const y = 1.0 - (e.clientY - rect.top) / rect.height;
       targetMouse = [x, y];
     }
+
     function handleMouseLeave() {
       targetMouse = [0.5, 0.5];
     }
+
     if (enableMouseInteraction) {
-      container.addEventListener("mousemove", handleMouseMove);
-      container.addEventListener("mouseleave", handleMouseLeave);
+      container.addEventListener("mousemove", handleMouseMove, {
+        passive: true,
+      });
+      container.addEventListener("mouseleave", handleMouseLeave, {
+        passive: true,
+      });
     }
 
     function update(t: number) {
+      // ===== perf collect =====
+      if (lastT !== null) {
+        const dt = t - lastT; // ms
+        frameTimes.push(dt);
+        if (dt > budgetMs) dropped += 1;
+      }
+      lastT = t;
+      frames += 1;
+
+      if (t - mStart >= METRICS_WINDOW_MS) {
+        const sorted = frameTimes.slice().sort((a, b) => a - b);
+        const avg = sorted.reduce((s, v) => s + v, 0) / (sorted.length || 1);
+        const p = (q: number) =>
+          sorted[Math.floor((sorted.length - 1) * q)] ?? 0;
+
+        const seconds = (t - mStart) / 1000;
+        const fps = frames / seconds;
+        const dropPct = frames ? (dropped / frames) * 100 : 0;
+
+        console.log("[Threads metrics]", {
+          seconds: Number(seconds.toFixed(2)),
+          fps_avg: Number(fps.toFixed(1)),
+          frame_ms_avg: Number(avg.toFixed(2)),
+          frame_ms_p95: Number(p(0.95).toFixed(2)),
+          frame_ms_p99: Number(p(0.99).toFixed(2)),
+          dropped_frames: dropped,
+          dropped_ratio_pct: Number(dropPct.toFixed(2)),
+          budget_ms: budgetMs,
+          renderScale,
+          dprCap,
+        });
+
+        // reset
+        mStart = t;
+        lastT = null;
+        frames = 0;
+        dropped = 0;
+        frameTimes.length = 0;
+      }
+      // ===== /perf collect =====
+
       if (enableMouseInteraction) {
         const smoothing = 0.05;
         currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0]);
@@ -206,11 +302,13 @@ const Threads: React.FC<ThreadsProps> = ({
         program.uniforms.uMouse.value[0] = 0.5;
         program.uniforms.uMouse.value[1] = 0.5;
       }
+
       program.uniforms.iTime.value = t * 0.001;
 
       renderer.render({ scene: mesh });
       animationFrameId.current = requestAnimationFrame(update);
     }
+
     animationFrameId.current = requestAnimationFrame(update);
 
     return () => {
@@ -222,6 +320,7 @@ const Threads: React.FC<ThreadsProps> = ({
         container.removeEventListener("mousemove", handleMouseMove);
         container.removeEventListener("mouseleave", handleMouseLeave);
       }
+
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
@@ -232,4 +331,4 @@ const Threads: React.FC<ThreadsProps> = ({
   );
 };
 
-export default Threads;
+export default ThreadsMd;
