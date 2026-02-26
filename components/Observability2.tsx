@@ -19,7 +19,7 @@ export default function Observability() {
   }, []);
 
   return (
-    <FadeUpOnView delay={50}>
+    <FadeUpOnView delay={30}>
       <section>
         {/* 타이틀 */}
         {/* <h2 className="text-white text-[40px] font-semibold leading-[1.3]"> */}

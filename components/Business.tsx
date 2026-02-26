@@ -8,7 +8,7 @@ import { ColorArray } from "@/constants/ColorArray";
 
 export default function Business() {
   return (
-    <FadeUpOnView delay={50} className="w-full">
+    <FadeUpOnView delay={30} className="w-full">
       <section>
         {/* 타이틀 */}
         <h2>
