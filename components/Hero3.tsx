@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import SplitText from "./reactbits/SplitText";
-import Orb from "./Orb";
+import NoiseWaveLinesLite from "./Threads4";
 
-export default function Hero2() {
+export default function Hero3() {
   const handleAnimationComplete = () => {
     console.log("All letters have animated!");
   };
@@ -13,24 +13,26 @@ export default function Hero2() {
     <section className="min-h-screen">
       {/* 배경 레이어 */}
 
-      <div className="absolute inset-0 left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0 z-0 min-w-[680px]">
-        <Orb
-          hoverIntensity={2}
-          rotateOnHover
-          hue={0}
-          forceHoverState={false}
-          backgroundColor="transparent"
+      <div className="absolute inset-0 z-0">
+        <NoiseWaveLinesLite
+          className="absolute inset-0 opacity-70"
+          background="transparent"
+          yCount={40} // 라인 수
+          xCount={50} // 부드러움(점 수)
+          lineAlpha={0.15}
+          lineWidth={1.1}
+          speed={0.1}
         />
       </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center md:pt-5 pb-0">
-        <h1 className="max-w-[70%] md:max-w-full text-main-gradient text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3] break-keep">
+        <h1 className="text-main-gradient text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3] break-keep">
           모바일 앱부터 웹까지
         </h1>
 
         <SplitText
           text="사용자 경험을 실시간으로 읽다"
-          className="text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] max-w-[240px] md:max-w-[420px] font-semibold text-white leading-[1.3]"
+          className="text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold text-white leading-[1.3]"
           delay={50}
           duration={1.25}
           ease="power3.out"
@@ -43,7 +45,7 @@ export default function Hero2() {
           onLetterAnimationComplete={handleAnimationComplete}
         />
 
-        <p className="max-w-[70%] md:max-w-full text-white font-normal leading-[1.6] text-base md:text-lg lg:text-xl mt-8 opacity-80 break-keep">
+        <p className="text-white font-normal leading-[1.6] text-base md:text-lg lg:text-xl mt-8 opacity-80 break-keep">
           사용자 이용 패턴과 성능 저하 구간을 즉시 파악하고
           <br className="hidden md:block" /> 문제를 해결하는 데 필요한 핵심
           데이터를 확보할 수 있습니다.

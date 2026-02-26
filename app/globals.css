@@ -252,12 +252,22 @@ textarea::placeholder {
   opacity: 0.3;
 }
 
+.hero-bg-test2 {
+  background-image: url("/hero_bg03.webp");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  animation: heroZoom 70s infinite alternate;
+  will-change: transform;
+  opacity: 0.2;
+}
+
 @keyframes heroZoom {
   from {
     transform: scale(1);
   }
   to {
-    transform: scale(1.5);
+    transform: scale(1.3);
   }
 }
 
