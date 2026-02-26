@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import SplitText from "./reactbits/SplitText";
-import ThreadsMd from "./reactbits/ThreadsMd";
+import ThreadsRow from "./reactbits/ThreadsRow";
 
 export default function Hero() {
   const handleAnimationComplete = () => {
@@ -13,53 +13,8 @@ export default function Hero() {
     <section className="min-h-screen">
       {/* 배경 레이어 */}
 
-      {/* <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen"> */}
       <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 opacity-70">
-        {/* <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 mix-blend-screen hero-bg-test"> */}
-        {/* <div className="absolute left-0 right-0 inset-0 z-0 mix-blend-screen hero-bg-test1"> */}
-        {/* <Threads
-          amplitude={2.5}
-          distance={0.1}
-          enableMouseInteraction={false}
-          color={[1, 1, 1]}
-        /> */}
-        <ThreadsMd
-          amplitude={2.5}
-          distance={0.1}
-          enableMouseInteraction={false}
-          color={[1, 1, 1]}
-        />
-        {/* <ThreadsRow
-          amplitude={2.5}
-          distance={0.1}
-          enableMouseInteraction={false}
-          color={[1, 1, 1]}
-        /> */}
-        {/* <WaveLinesCanvas segments={30} speed={0.000135} /> */}
-        {/* <Threads amplitude={1} distance={0} enableMouseInteraction /> */}
-        {/* <div className="solution-bg absolute inset-0 -z-0"></div> */}
-        {/* <LegacyWave className="absolute inset-0" /> */}
-        {/* <NoiseWaveLinesLite
-          className="absolute inset-0 opacity-70"
-          background="transparent"
-          yCount={40} // 라인 수
-          xCount={50} // 부드러움(점 수)
-          lineAlpha={0.15}
-          lineWidth={1.1}
-          speed={0.1}
-        /> */}
-        {/* <SimpleNoiseBezierTrail
-          // className="absolute inset-0"
-          background="#050018"
-          bumps={5}
-          curveFactor={0.8}
-          amplitude={180}
-          speed={0.002} // 느리게 (기존 0.006보다 느림)
-          lineAlpha={0.16}
-          lineWidth={1}
-          fadeAlpha={0.02} // 잔상 빨리 사라짐 (기존 0.03보다 빠름)
-        /> */}
-        {/* <WavesBackground /> */}
+        <ThreadsRow amplitude={2.5} distance={0.1} color={[1, 1, 1]} />
       </div>
 
       <div className="relative z-10 pointer-events-none flex flex-col items-center pb-[20%] md:pb-0">
