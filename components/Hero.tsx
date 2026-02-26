@@ -2,15 +2,6 @@
 
 import Link from "next/link";
 import SplitText from "./reactbits/SplitText";
-import WaveLinesCanvas from "./Threads2";
-import Threads from "./reactbits/Threads";
-import LegacyWave from "./Threads3";
-import NoiseWaveLines from "./Threads4";
-import NoiseWaveLinesLite from "./Threads4";
-import SimpleNoiseBezierLine from "./Thread5";
-import SimpleNoiseBezierTrail from "./Thread5";
-import WavesBackground from "./Thread6";
-import ThreadsRow from "./reactbits/ThreadsRow";
 import ThreadsMd from "./reactbits/ThreadsMd";
 
 export default function Hero() {
