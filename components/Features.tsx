@@ -8,7 +8,7 @@ import FadeUpOnView from "./FadeUpOnView";
 
 export default function Features() {
   return (
-    <FadeUpOnView delay={50}>
+    <FadeUpOnView delay={30}>
       <section id="features">
         {/* 타이틀 */}
         <h2>단절된 데이터를 넘어 서비스의 전 과정을 관통하다</h2>

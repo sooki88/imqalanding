@@ -13,11 +13,12 @@ export default function Hero() {
     <section className="min-h-screen">
       {/* 배경 레이어 */}
 
-      <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 opacity-70">
+      {/* <div className="absolute bottom-[8%] left-0 right-0 md:inset-0 z-0 opacity-70"> */}
+      <div className="absolute hidden md:block left-0 right-0 md:inset-0 z-0 opacity-70">
         <ThreadsRow amplitude={2.5} distance={0.1} color={[1, 1, 1]} />
       </div>
 
-      <div className="relative z-10 pointer-events-none flex flex-col items-center pb-[20%] md:pb-0">
+      <div className="relative z-10 pointer-events-none flex flex-col items-center pb-0">
         <h1 className="text-main-gradient text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold leading-[1.3] break-keep">
           모바일 앱부터 웹까지
         </h1>
