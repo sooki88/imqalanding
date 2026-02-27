@@ -13,8 +13,8 @@ type Props = {
 export default function CyclingImage({
   images,
   title,
-  intervalMs = 2000,
-  fadeMs = 500,
+  intervalMs = 3000,
+  fadeMs = 1000,
 }: Props) {
   const safe = images.filter(Boolean);
   const len = safe.length;

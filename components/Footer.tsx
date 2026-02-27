@@ -14,7 +14,12 @@ export default function Footer() {
         {/* 회사정보 */}
         <div className="flex gap-x-6 gap-y-[2px] flex-wrap mt-3 text-slate-300 text-sm">
           {CompanyInfo.map((info, index) => (
-            <span key={index} className={index == 0 ? "font-semibold" : ""}>
+            <span
+              key={index}
+              className={
+                index == 0 ? "font-semibold no-underline" : "no-underline"
+              }
+            >
               {info}
             </span>
           ))}
