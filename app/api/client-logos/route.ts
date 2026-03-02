@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { unstable_cache } from "next/cache";
 import { getSupabaseServerClient } from "@/utils/supabase-server";
 
-export const revalidate = 60;
+export const revalidate = 86400; // 24시간(60 * 60 * 24)
 export const dynamic = "force-static";
 
 const getCachedClientLogos = unstable_cache(

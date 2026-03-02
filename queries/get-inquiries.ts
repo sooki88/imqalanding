@@ -1,3 +1,4 @@
+// 문의하기 데이터 가져오기
 import { TypedSupabaseClient } from "@/utils/supabase";
 
 export function getInquiries(client: TypedSupabaseClient) {

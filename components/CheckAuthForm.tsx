@@ -2,9 +2,7 @@
 
 import InputWithLabel from "@/components/InputWithLabel";
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import useSignInAdminMutation from "@/hooks/use-sign-in-admin-mutation";
-import useAdminSessionQuery from "@/hooks/use-admin-session-query";
 
 export type FormState = {
   email: string;
@@ -17,9 +15,7 @@ const initialForm: FormState = {
 };
 
 export default function CheckAuthForm() {
-  const router = useRouter();
   const signInMutation = useSignInAdminMutation();
-  const adminSessionQuery = useAdminSessionQuery();
 
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitted, setSubmitted] = useState(false);
@@ -64,6 +60,7 @@ export default function CheckAuthForm() {
           //   router.replace("/admin/dashboard");
         },
         onError: (error) => {
+          console.error(error);
           alert("로그인을 실패했습니다.");
         },
       },

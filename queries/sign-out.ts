@@ -1,3 +1,4 @@
+// 로그아웃
 import { TypedSupabaseClient } from "@/utils/supabase";
 
 export async function signOut(client: TypedSupabaseClient) {

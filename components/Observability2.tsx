@@ -154,6 +154,7 @@ function Step({ number, title, children, className = "", active }: StepProps) {
           ? "border-[rgba(0,119,255,1)] text-[#0077ff]"
           : "border-slate-8000 text-slate-400",
         number == "01" ? "mt-14" : "",
+        className,
       ].join(" ")}
     >
       {number} {title}

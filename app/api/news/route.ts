@@ -1,33 +1,8 @@
-// import { NextResponse } from "next/server";
-// import { getSupabaseServerClient } from "@/utils/supabase-server";
-
-// export const revalidate = 60; // 서버 캐시 TTL (예: 60초), 6시간은 21600
-// export const dynamic = "force-static";
-
-// export async function GET() {
-//   console.log("[api/news] HIT SUPABASE", new Date().toISOString()); // 테스트용
-
-//   const supabase = getSupabaseServerClient();
-
-//   const { data, error } = await supabase
-//     .from("news")
-//     .select("id, created_at, title, news_date, content")
-//     .order("created_at", { ascending: false });
-
-//   if (error) {
-//     return NextResponse.json({ error: error.message }, { status: 500 });
-//   }
-
-//   console.log("[news] hitting supabase");
-
-//   return NextResponse.json(data);
-// }
-
 import { NextResponse } from "next/server";
 import { unstable_cache } from "next/cache";
 import { getSupabaseServerClient } from "@/utils/supabase-server";
 
-export const revalidate = 60; //
+export const revalidate = 86400; // 24시간(60 * 60 * 24)
 export const dynamic = "force-static";
 
 const getCachedNews = unstable_cache(

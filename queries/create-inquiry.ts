@@ -1,4 +1,4 @@
-// import { FormState } from "@/components/ContactForm";
+// 문의하기 생성하기
 import { FormState } from "@/components/ContactForm";
 import { TypedSupabaseClient } from "@/utils/supabase";
 
@@ -21,6 +21,7 @@ export async function createInquiry(
   // .single();
 
   if (error) throw new Error(error.message);
-  // return data;
+  console.log(data);
+
   return { ok: true };
 }

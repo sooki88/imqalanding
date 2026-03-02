@@ -1,4 +1,3 @@
-// app/api/admin/client-logos/route.ts
 import { NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
 import { getSupabaseServerClient } from "@/utils/supabase-server";
