@@ -6,7 +6,7 @@ import ThreadsRow from "./reactbits/ThreadsRow";
 
 export default function Hero() {
   const handleAnimationComplete = () => {
-    console.log("All letters have animated!");
+    console.log("Hero 글자 애니메이션 끝");
   };
 
   return (

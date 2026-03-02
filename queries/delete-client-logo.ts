@@ -1,33 +1,22 @@
-import { TypedSupabaseClient } from "@/utils/supabase";
-
 export type DeleteClientLogoParams = {
   id: number;
-  imagePath: string; // 예: "logos/1700000000000-samsung.webp"
+  imagePath: string;
 };
 
 export async function deleteClientLogo(
-  client: TypedSupabaseClient,
-  { id, imagePath }: DeleteClientLogoParams,
+  _client: any,
+  params: DeleteClientLogoParams,
 ) {
-  // 1) Storage 파일 삭제 (먼저)
-  // 파일이 이미 없을 수도 있으니 에러 처리 주의
-  const { error: storageError } = await client.storage
-    .from("client-logos")
-    .remove([imagePath]);
+  const res = await fetch("/api/admin/client-logos", {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
 
-  if (storageError) {
-    throw new Error(`이미지 삭제 실패: ${storageError.message}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || "Failed to delete logo");
   }
 
-  // 2) DB row 삭제
-  const { error: dbError } = await client
-    .from("client_logos")
-    .delete()
-    .eq("id", id);
-
-  if (dbError) {
-    throw new Error(`로고 데이터 삭제 실패: ${dbError.message}`);
-  }
-
-  return { ok: true };
+  return res.json();
 }

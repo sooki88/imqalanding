@@ -1,21 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useSupabase from "./useSupabase";
-import {
-  deleteClientLogo,
-  DeleteClientLogoParams,
-} from "@/queries/delete-client-logo";
+import { deleteClientLogoAction } from "@/app/actions/client-logos";
 
-function useDeleteClientLogoMutation() {
-  const client = useSupabase();
+export default function useDeleteClientLogoMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (params: DeleteClientLogoParams) =>
-      deleteClientLogo(client, params),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["client-logos"] });
+    mutationFn: (params: { id: number; imagePath: string }) =>
+      deleteClientLogoAction(params),
+    onSuccess: async () => {
+      await queryClient.refetchQueries({
+        queryKey: ["client-logos"],
+        type: "all",
+      });
     },
   });
 }
-
-export default useDeleteClientLogoMutation;

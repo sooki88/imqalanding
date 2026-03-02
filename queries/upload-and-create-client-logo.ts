@@ -1,10 +1,4 @@
-import { TypedSupabaseClient } from "@/utils/supabase";
-import {
-  uploadClientLogoImage,
-  UploadClientLogoImageResult,
-} from "./upload-client-logo-image";
-import { createClientLogo } from "./create-client-logo";
-
+// app/queries/upload-and-create-client-logo.ts
 export type UploadAndCreateClientLogoParams = {
   file: File;
   name?: string | null;
@@ -12,29 +6,25 @@ export type UploadAndCreateClientLogoParams = {
   sortOrder: number;
 };
 
-export type UploadAndCreateClientLogoResult = {
-  logo: any;
-  upload: UploadClientLogoImageResult;
-};
-
 export async function uploadAndCreateClientLogo(
-  client: TypedSupabaseClient,
+  _client: any,
   { file, name, alt, sortOrder }: UploadAndCreateClientLogoParams,
-): Promise<UploadAndCreateClientLogoResult> {
-  const upload = await uploadClientLogoImage(client, { file });
+) {
+  const form = new FormData();
+  form.append("file", file);
+  form.append("alt", alt);
+  form.append("sortOrder", String(sortOrder));
+  if (name !== undefined && name !== null) form.append("name", name);
 
-  try {
-    const logo = await createClientLogo(client, {
-      name,
-      alt,
-      imagePath: upload.imagePath,
-      sortOrder,
-    });
+  const res = await fetch("/api/admin/client-logos", {
+    method: "POST",
+    body: form,
+  });
 
-    return { logo, upload };
-  } catch (error) {
-    // DB insert 실패 시 업로드된 파일 롤백
-    await client.storage.from("client-logos").remove([upload.imagePath]);
-    throw error;
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || "Failed to upload logo");
   }
+
+  return res.json();
 }
