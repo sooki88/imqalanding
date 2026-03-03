@@ -1,8 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import SplitText from "./reactbits/SplitText";
 import ThreadsRow from "./reactbits/ThreadsRow";
+import SplitTextArray from "./reactbits/SplitTextArray";
+
+const HERO_TITLES = [
+  "사용자 경험을 실시간으로 읽다",
+  "새로운 성능 관리를 시작하다",
+  "문제의 진짜 원인을 찾다",
+] as const;
 
 export default function Hero() {
   const handleAnimationComplete = () => {
@@ -23,8 +29,10 @@ export default function Hero() {
           모바일 앱부터 웹까지
         </h1>
 
-        <SplitText
-          text="사용자 경험을 실시간으로 읽다"
+        <SplitTextArray
+          texts={[...HERO_TITLES]}
+          // rotateDelay={1.2}
+          rotateDelay={2}
           className="text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold text-white leading-[1.3]"
           delay={50}
           duration={1.25}
