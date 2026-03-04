@@ -146,7 +146,7 @@ const FeatureContents = [
       "세션↔︎트레이스 분석",
       "성능 ∙ 이벤트 ∙ 에러 파악",
     ],
-    images: ["/session_1.webp", "/session_2.webp"],
+    images: ["/session1.webp", "/session2.webp"],
   },
   {
     category: "Distributed Tracing",
