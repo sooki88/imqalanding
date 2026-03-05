@@ -6,9 +6,15 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(GSAPSplitText, useGSAP);
 
 export interface SplitTextArrayProps {
+  /** 항상 배열로만 받음 */
   texts: string[];
+
+  /** 초기 레이아웃 고정용 (안 주면 texts 중 가장 긴 문구 사용) */
+  reserveText?: string;
+
   rotate?: boolean; // 기본 true
   rotateDelay?: number; // 초, 기본 1.2
+
   className?: string;
   delay?: number; // ms
   duration?: number; // s
@@ -30,6 +36,8 @@ export interface SplitTextArrayProps {
 
 const SplitTextArray: React.FC<SplitTextArrayProps> = ({
   texts,
+  reserveText,
+
   rotate = true,
   rotateDelay = 1.2,
 
@@ -57,7 +65,7 @@ const SplitTextArray: React.FC<SplitTextArrayProps> = ({
     onCompleteRef.current = onLetterAnimationComplete;
   }, [onLetterAnimationComplete]);
 
-  // ✅ texts가 비었을 때는 아무것도 안 하게
+  // texts가 비었을 때는 아무것도 안 하게
   const list = useMemo(() => (texts?.length ? texts : []), [texts]);
   const shouldRotate = useMemo(
     () => (rotate && list.length > 1 ? true : false),
@@ -65,6 +73,14 @@ const SplitTextArray: React.FC<SplitTextArrayProps> = ({
   );
 
   const currentText = list[idx] ?? "";
+
+  // 초기 높이 확보용 문구(안 보이지만 공간 차지)
+  const reserved = useMemo(() => {
+    if (reserveText && reserveText.length) return reserveText;
+    if (!list.length) return "";
+    // 가장 긴 문구로 높이 확보 (줄바꿈 가능성 최소화)
+    return [...list].sort((a, b) => b.length - a.length)[0];
+  }, [reserveText, list]);
 
   useEffect(() => {
     // texts가 바뀌면 처음부터
@@ -94,7 +110,7 @@ const SplitTextArray: React.FC<SplitTextArrayProps> = ({
 
       const anyEl = el as any;
 
-      // ✅ 기존 split/tl 정리
+      // 기존 split/tl 정리
       if (anyEl._rbsplitInstance) {
         try {
           anyEl._rbsplitInstance.revert();
@@ -108,10 +124,11 @@ const SplitTextArray: React.FC<SplitTextArrayProps> = ({
         anyEl._rbsplitTimeline = undefined;
       }
 
-      // 1) "평문 텍스트가 먼저 보이는 프레임" 방지: 먼저 숨김
+      // 평문 프레임 방지: 먼저 숨김
       gsap.set(el, { opacity: 0 });
 
-      // 2) 텍스트 교체 (children 렌더 안 하므로 여기서만)
+      // placeholder(span) 제거 후 텍스트 주입
+      el.innerHTML = "";
       el.textContent = currentText;
 
       let targets: Element[] = [];
@@ -148,13 +165,13 @@ const SplitTextArray: React.FC<SplitTextArrayProps> = ({
             defaults: { ease },
           });
 
-          // 3) 시작 상태 먼저 세팅(이 시점까지 el은 opacity:0이라 화면에 안 보임)
+          // 시작 상태 세팅 (아직 el은 opacity:0)
           tl.set(targets, {
             ...from,
             willChange: "transform, opacity",
           });
 
-          // 4) 이제 "숨김 해제" (split + from 적용 이후)
+          // split+from 적용 후 보여주기
           tl.call(() => {
             gsap.set(el, { opacity: 1 });
           });
@@ -222,7 +239,7 @@ const SplitTextArray: React.FC<SplitTextArrayProps> = ({
         isInView = true;
       }
 
-      // ✅ 초기 1회
+      // 초기 1회
       syncPlayback();
 
       return () => {
@@ -273,7 +290,10 @@ const SplitTextArray: React.FC<SplitTextArrayProps> = ({
       style={{ textAlign, wordWrap: "break-word" }}
       className={`split-parent overflow-hidden inline-block whitespace-normal ${className}`}
       suppressHydrationWarning
-    />
+    >
+      {/* 레이아웃 자리 확보용(안 보임) */}
+      <span style={{ visibility: "hidden" }}>{reserved}</span>
+    </Tag>
   );
 };
 

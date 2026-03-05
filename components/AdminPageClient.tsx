@@ -4,8 +4,19 @@ import useAdminSessionQuery from "@/hooks/use-admin-session-query";
 import CheckAuthForm from "@/components/CheckAuthForm";
 import AdminDashboard from "./AdminDashboard";
 import LoadingSpinner from "./LoadingSpinner";
+import { useEffect } from "react";
 
 export default function AdminPageClient() {
+  useEffect(() => {
+    // 새로고침/진입 시 항상 맨 위
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+    // 브라우저의 scroll restoration이 켜져 있으면 꺼버리기
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
   const adminSessionQuery = useAdminSessionQuery();
 
   if (adminSessionQuery.isLoading) {

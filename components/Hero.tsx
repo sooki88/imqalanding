@@ -31,7 +31,7 @@ export default function Hero() {
 
         <SplitTextArray
           texts={[...HERO_TITLES]}
-          // rotateDelay={1.2}
+          reserveText={HERO_TITLES[0]}
           rotateDelay={2}
           className="text-4xl md:text-[clamp(56px,4.26vw+4.8px,64px)] font-semibold text-white leading-[1.3]"
           delay={50}
