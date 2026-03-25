@@ -179,7 +179,7 @@ const ObservabilitySolution = [
   },
   {
     title: "크래시 분석",
-    summary: "가장 많이 발생한 문제와 과정, 원일을 분석하고 추적",
+    summary: "가장 많이 발생한 문제와 과정, 원인을 분석하고 추적",
   },
   {
     title: "트레이스",
